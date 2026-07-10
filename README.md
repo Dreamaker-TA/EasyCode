@@ -125,7 +125,7 @@ BACKEND_PORT=8010 FRONTEND_PORT=5174 make dev
 
 ## One Problem, a Complete Training Loop
 
-These screenshots follow a real local training session for LeetCode 704, Binary Search. Both public tests passed, the AI review rated the submission A, EasyCode captured two process snapshots, and the session produced a follow-up review schedule.
+Using LeetCode 704, Binary Search, as an example, EasyCode connects local coding, Python tests, five-part AI review, process replay, and spaced review in one continuous training loop.
 
 ### 1. Solve locally and verify with Python tests
 
@@ -144,6 +144,12 @@ EasyCode combines test evidence, complexity analysis, code quality, and process 
 Step through recorded snapshots to see when key lines appeared, inspect the finished code in context, compare attempts, and export the session as Markdown.
 
 ![EasyCode history replay with recorded code snapshots and a replay timeline](assets/screenshots/easycode-replay.jpg)
+
+### 4. Save and share the result
+
+Export the completed review as a share card or Markdown. The card brings the problem, mastery rating, five-dimension profile, and key diagnosis together in one image.
+
+![EasyCode share card for LeetCode 704 with an A rating and five-dimension radar chart](assets/screenshots/easycode-share-card.png)
 
 ---
 

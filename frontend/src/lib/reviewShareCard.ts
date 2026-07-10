@@ -40,14 +40,26 @@ interface TextBlockOptions {
   maxLines?: number;
 }
 
+interface TextBlockResult {
+  fontSize: number;
+  lineHeight: number;
+  lineCount: number;
+  bottomY: number;
+}
+
 const CARD_WIDTH = 1200;
 const CARD_HEIGHT = 630;
 const SHARE_CARD_BG = "/share-card-bg-generated.jpg";
 const LEVELS = [0.25, 0.5, 0.75, 1];
-const LEFT_X = 76;
-const LEFT_W = 650;
-const RIGHT_PANEL_X = 782;
-const RIGHT_PANEL_W = 342;
+const PAPER_X = 52;
+const PAPER_Y = 40;
+const PAPER_W = 1096;
+const PAPER_H = 550;
+const LEFT_X = 84;
+const LEFT_W = 612;
+const DIVIDER_X = 724;
+const RIGHT_PANEL_X = 760;
+const RIGHT_PANEL_W = 352;
 
 export async function renderShareCardToCanvas(
   canvas: HTMLCanvasElement,
@@ -64,20 +76,31 @@ export async function renderShareCardToCanvas(
   ctx.clearRect(0, 0, CARD_WIDTH, CARD_HEIGHT);
   await drawBackground(ctx);
 
-  ctx.fillStyle = "rgba(250, 249, 247, 0.22)";
-  ctx.fillRect(0, 0, CARD_WIDTH, CARD_HEIGHT);
+  ctx.fillStyle = color.bgElevated;
+  roundedRect(ctx, PAPER_X, PAPER_Y, PAPER_W, PAPER_H, tokens.radius.lg);
+  ctx.fill();
+  ctx.strokeStyle = color.lineStrong;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
 
-  drawHeader(ctx, input);
-  drawDiagnosis(ctx, input.diagnosis);
+  ctx.strokeStyle = color.lineStrong;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(DIVIDER_X, PAPER_Y + 42);
+  ctx.lineTo(DIVIDER_X, PAPER_Y + PAPER_H - 42);
+  ctx.stroke();
+
+  const diagnosisY = drawHeader(ctx, input);
+  drawDiagnosis(ctx, input.diagnosis, diagnosisY);
   drawRatingPanel(ctx, input.effectiveRating, input.submission);
   drawRadar(ctx, input.dimensions);
-  drawBrand(ctx);
+  drawFooter(ctx, input.submission);
 
-  ctx.strokeStyle = color.accentMuted;
-  ctx.lineWidth = 2;
+  ctx.strokeStyle = color.accent;
+  ctx.lineWidth = 3;
   ctx.beginPath();
-  ctx.moveTo(LEFT_X, 570);
-  ctx.lineTo(LEFT_X + LEFT_W, 570);
+  ctx.moveTo(PAPER_X, PAPER_Y + PAPER_H);
+  ctx.lineTo(PAPER_X + PAPER_W, PAPER_Y + PAPER_H);
   ctx.stroke();
 }
 
@@ -121,66 +144,115 @@ async function drawBackground(ctx: CanvasRenderingContext2D): Promise<void> {
   }
 }
 
-function drawHeader(ctx: CanvasRenderingContext2D, input: RenderShareCardInput) {
+function drawHeader(ctx: CanvasRenderingContext2D, input: RenderShareCardInput): number {
   const color = tokens.light;
-  const reviewDate =
-    input.submission.reviewedAt ??
-    input.submission.submittedAt ??
-    input.submission.createdAt;
+  drawBrandLockup(ctx);
 
-  ctx.fillStyle = color.inkSubtle;
-  ctx.font = `700 19px ${tokens.font.mono}`;
-  ctx.fillText("EASYCODE REVIEW", LEFT_X, 86);
-
-  ctx.fillStyle = color.inkMuted;
-  ctx.font = `600 18px ${tokens.font.sans}`;
-  ctx.fillText(`${formatReviewDate(reviewDate)} · ${formatLanguage(input.submission.language)}`, LEFT_X, 118);
-
-  drawFitTextBlock(ctx, formatProblemTitle(input.exportInfo), {
+  const title = drawFitTextBlock(ctx, formatProblemTitle(input.exportInfo), {
     x: LEFT_X,
-    y: 176,
+    y: 168,
     maxWidth: LEFT_W,
-    maxHeight: 164,
-    maxFontSize: 56,
-    minFontSize: 30,
+    maxHeight: 110,
+    maxFontSize: 48,
+    minFontSize: 32,
     weight: 760,
     family: tokens.font.sans,
     color: color.ink,
-    lineHeightRatio: 1.12,
-    maxLines: 3,
+    lineHeightRatio: 1.14,
+    maxLines: 2,
   });
+
+  const metaY = title.bottomY + 24;
+  ctx.fillStyle = color.inkMuted;
+  ctx.font = `620 21px ${tokens.font.sans}`;
+  ctx.fillText(`${formatLanguage(input.submission.language)} · 五维训练复盘`, LEFT_X, metaY);
+  return metaY + 34;
 }
 
-function drawDiagnosis(ctx: CanvasRenderingContext2D, diagnosis: string) {
+function drawBrandLockup(ctx: CanvasRenderingContext2D): void {
   const color = tokens.light;
   const x = LEFT_X;
-  const y = 386;
-  const width = LEFT_W;
-  const height = 136;
+  const y = 70;
 
-  ctx.fillStyle = "rgba(255, 255, 255, 0.72)";
-  roundedRect(ctx, x, y, width, height, tokens.radius.lg);
+  drawHandCheck(ctx, x, y + 2, 32);
+
+  ctx.fillStyle = color.ink;
+  ctx.font = `780 31px ${tokens.font.sans}`;
+  ctx.textAlign = "left";
+  ctx.fillText("EasyCode", x + 46, y + 27);
+
+  ctx.fillStyle = color.inkSubtle;
+  ctx.font = `700 14px ${tokens.font.mono}`;
+  ctx.fillText("训练复盘卡", x + 48, y + 49);
+}
+
+function drawHandCheck(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  size: number,
+): void {
+  const color = tokens.light;
+  ctx.save();
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.strokeStyle = color.accent;
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(x + size * 0.1, y + size * 0.52);
+  ctx.bezierCurveTo(
+    x + size * 0.23,
+    y + size * 0.66,
+    x + size * 0.31,
+    y + size * 0.78,
+    x + size * 0.42,
+    y + size * 0.83,
+  );
+  ctx.bezierCurveTo(
+    x + size * 0.58,
+    y + size * 0.48,
+    x + size * 0.75,
+    y + size * 0.27,
+    x + size * 0.96,
+    y + size * 0.12,
+  );
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawDiagnosis(
+  ctx: CanvasRenderingContext2D,
+  diagnosis: string,
+  y: number,
+) {
+  const color = tokens.light;
+  const x = LEFT_X;
+  const width = LEFT_W;
+  const height = Math.min(218, Math.max(160, 518 - y));
+
+  ctx.fillStyle = color.bgSoft;
+  roundedRect(ctx, x, y, width, height, tokens.radius.md);
   ctx.fill();
-  ctx.strokeStyle = "rgba(214, 210, 202, 0.82)";
-  ctx.lineWidth = 1.2;
+  ctx.strokeStyle = color.lineStrong;
+  ctx.lineWidth = 1;
   ctx.stroke();
 
   ctx.fillStyle = color.inkSubtle;
-  ctx.font = `700 17px ${tokens.font.mono}`;
-  ctx.fillText("主诊断", x + 28, y + 38);
+  ctx.font = `700 18px ${tokens.font.mono}`;
+  ctx.fillText("主诊断", x + 24, y + 36);
 
   drawFitTextBlock(ctx, diagnosis, {
-    x: x + 28,
-    y: y + 72,
-    maxWidth: width - 56,
-    maxHeight: 48,
-    maxFontSize: 24,
-    minFontSize: 17,
+    x: x + 24,
+    y: y + 70,
+    maxWidth: width - 48,
+    maxHeight: height - 86,
+    maxFontSize: 23,
+    minFontSize: 18,
     weight: 420,
     family: tokens.font.serif,
     color: color.ink,
-    lineHeightRatio: 1.22,
-    maxLines: 2,
+    lineHeightRatio: 1.3,
+    maxLines: 4,
   });
 }
 
@@ -192,48 +264,50 @@ function drawRatingPanel(
   const color = tokens.light;
   const stampColor = ratingColor(rating);
   const x = RIGHT_PANEL_X;
-  const y = 78;
+  const y = 84;
   const width = RIGHT_PANEL_W;
-  const height = 150;
+  const height = 142;
 
-  ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+  ctx.fillStyle = color.bgSoft;
   roundedRect(ctx, x, y, width, height, tokens.radius.lg);
   ctx.fill();
-  ctx.strokeStyle = "rgba(214, 210, 202, 0.78)";
-  ctx.lineWidth = 1.2;
+  ctx.strokeStyle = color.lineStrong;
+  ctx.lineWidth = 1;
   ctx.stroke();
 
   ctx.fillStyle = color.inkSubtle;
-  ctx.font = `700 17px ${tokens.font.mono}`;
-  ctx.fillText("本次评级", x + 26, y + 40);
+  ctx.font = `700 18px ${tokens.font.mono}`;
+  ctx.fillText("本次评级", x + 24, y + 40);
 
   ctx.fillStyle = stampColor;
-  ctx.font = `850 92px ${tokens.font.mono}`;
-  ctx.fillText(rating ?? "-", x + 24, y + 123);
+  ctx.font = `850 88px ${tokens.font.mono}`;
+  ctx.fillText(rating ?? "-", x + 24, y + 120);
 
   ctx.fillStyle = color.inkMuted;
-  ctx.font = `600 18px ${tokens.font.mono}`;
   ctx.textAlign = "right";
-  ctx.fillText(
-    formatReviewDate(submission.reviewedAt ?? submission.submittedAt ?? submission.createdAt),
-    x + width - 26,
-    y + 112,
-  );
+  ctx.font = `600 16px ${tokens.font.mono}`;
+  ctx.fillText("语言", x + width - 24, y + 66);
+  ctx.fillStyle = color.ink;
+  ctx.font = `760 24px ${tokens.font.sans}`;
+  ctx.fillText(formatLanguage(submission.language), x + width - 24, y + 96);
+  ctx.fillStyle = color.inkMuted;
+  ctx.font = `600 15px ${tokens.font.mono}`;
+  ctx.fillText("五维复盘", x + width - 24, y + 120);
   ctx.textAlign = "left";
 }
 
 function drawRadar(ctx: CanvasRenderingContext2D, dimensions: ReviewDimension[]) {
   const color = tokens.light;
   const panelX = RIGHT_PANEL_X;
-  const panelY = 252;
+  const panelY = 246;
   const panelW = RIGHT_PANEL_W;
   const panelH = 272;
-  const size = 224;
+  const size = 248;
   const originX = panelX + (panelW - size) / 2;
-  const originY = panelY + 44;
+  const originY = panelY + 12;
   const geometry = { center: size / 2 };
-  const radius = 72;
-  const labelRadius = 98;
+  const radius = 78;
+  const labelRadius = 104;
   const points = dimensions.map((dimension, index) => {
     const angle = angleForIndex(index, dimensions.length);
     const value = dimension.available && dimension.value !== null ? dimension.value / 100 : 0;
@@ -248,16 +322,12 @@ function drawRadar(ctx: CanvasRenderingContext2D, dimensions: ReviewDimension[])
 
   ctx.save();
 
-  ctx.fillStyle = "rgba(255, 255, 255, 0.68)";
+  ctx.fillStyle = color.bgSoft;
   roundedRect(ctx, panelX, panelY, panelW, panelH, tokens.radius.lg);
   ctx.fill();
-  ctx.strokeStyle = "rgba(214, 210, 202, 0.76)";
-  ctx.lineWidth = 1.2;
+  ctx.strokeStyle = color.lineStrong;
+  ctx.lineWidth = 1;
   ctx.stroke();
-
-  ctx.fillStyle = color.inkSubtle;
-  ctx.font = `700 17px ${tokens.font.mono}`;
-  ctx.fillText("五维雷达", panelX + 24, panelY + 32);
 
   ctx.translate(originX, originY);
 
@@ -278,8 +348,11 @@ function drawRadar(ctx: CanvasRenderingContext2D, dimensions: ReviewDimension[])
   const plot = points.map((point) => point.plot);
   if (plot.some((point) => point.x !== geometry.center || point.y !== geometry.center)) {
     drawClosedPath(ctx, plot);
-    ctx.fillStyle = "rgba(36, 107, 49, 0.15)";
+    ctx.save();
+    ctx.globalAlpha = 0.14;
+    ctx.fillStyle = color.accent;
     ctx.fill();
+    ctx.restore();
     ctx.strokeStyle = color.accent;
     ctx.lineWidth = 4;
     ctx.stroke();
@@ -292,7 +365,7 @@ function drawRadar(ctx: CanvasRenderingContext2D, dimensions: ReviewDimension[])
     ctx.fill();
 
     ctx.fillStyle = color.inkMuted;
-    ctx.font = `700 15px ${tokens.font.sans}`;
+    ctx.font = `700 16px ${tokens.font.sans}`;
     ctx.textAlign = canvasTextAlign(labelAnchor(point.label.x, geometry, 16));
     ctx.textBaseline = "middle";
     ctx.fillText(point.dimension.label, point.label.x, point.label.y);
@@ -300,34 +373,37 @@ function drawRadar(ctx: CanvasRenderingContext2D, dimensions: ReviewDimension[])
   ctx.restore();
 }
 
-function drawBrand(ctx: CanvasRenderingContext2D) {
-  const x = RIGHT_PANEL_X;
-  const y = 546;
-  const width = RIGHT_PANEL_W;
+function drawFooter(
+  ctx: CanvasRenderingContext2D,
+  submission: ReviewShareCardSubmissionInfo,
+) {
+  const color = tokens.light;
+  const reviewDate =
+    submission.reviewedAt ?? submission.submittedAt ?? submission.createdAt;
+  const y = 554;
 
-  ctx.fillStyle = "rgba(26, 25, 22, 0.78)";
-  roundedRect(ctx, x, y, width, 50, tokens.radius.lg);
-  ctx.fill();
-
-  ctx.fillStyle = tokens.light.bg;
-  ctx.font = `760 22px ${tokens.font.sans}`;
+  ctx.fillStyle = color.inkMuted;
+  ctx.font = `500 15px ${tokens.font.mono}`;
   ctx.textAlign = "left";
-  ctx.fillText("EasyCode", x + 22, y + 23);
-  ctx.fillStyle = "rgba(250, 249, 247, 0.72)";
+  ctx.fillText("local algorithm practice review", LEFT_X, y);
+
+  ctx.fillStyle = color.inkSubtle;
   ctx.font = `500 14px ${tokens.font.mono}`;
-  ctx.fillText("local algorithm practice review", x + 22, y + 39);
+  ctx.textAlign = "right";
+  ctx.fillText(formatReviewDate(reviewDate), PAPER_X + PAPER_W - 36, y);
+  ctx.textAlign = "left";
 }
 
 function drawFitTextBlock(
   ctx: CanvasRenderingContext2D,
   rawText: string,
   options: TextBlockOptions,
-) {
+): TextBlockResult {
   const text = normalizeText(rawText);
   const ratio = options.lineHeightRatio ?? 1.22;
   let best: { fontSize: number; lineHeight: number; lines: string[] } | null = null;
 
-  const floorFontSize = Math.min(options.minFontSize, 10);
+  const floorFontSize = options.minFontSize;
   for (let fontSize = options.maxFontSize; fontSize >= floorFontSize; fontSize -= 1) {
     ctx.font = `${options.weight} ${fontSize}px ${options.family}`;
     const lines = clampLines(ctx, wrapText(ctx, text, options.maxWidth), options);
@@ -358,6 +434,12 @@ function drawFitTextBlock(
   best.lines.forEach((line, index) => {
     ctx.fillText(line, options.x, options.y + index * best.lineHeight);
   });
+  return {
+    fontSize: best.fontSize,
+    lineHeight: best.lineHeight,
+    lineCount: best.lines.length,
+    bottomY: options.y + Math.max(0, best.lines.length - 1) * best.lineHeight,
+  };
 }
 
 function clampLines(
@@ -366,13 +448,16 @@ function clampLines(
   options: TextBlockOptions,
 ): string[] {
   if (!options.maxLines || lines.length <= options.maxLines) return lines;
-  const next = lines.slice(0, options.maxLines);
-  const chars = Array.from(next[next.length - 1] ?? "");
-  while (chars.length > 0 && ctx.measureText(`${chars.join("")}…`).width > options.maxWidth) {
+  const clamped = lines.slice(0, options.maxLines);
+  const chars = Array.from(clamped[clamped.length - 1] ?? "");
+  while (
+    chars.length > 0 &&
+    ctx.measureText(`${chars.join("")}…`).width > options.maxWidth
+  ) {
     chars.pop();
   }
-  next[next.length - 1] = `${chars.join("") || "…"}${chars.length ? "…" : ""}`;
-  return next;
+  clamped[clamped.length - 1] = `${chars.join("")}…`;
+  return clamped;
 }
 
 function wrapText(
@@ -381,16 +466,17 @@ function wrapText(
   maxWidth: number,
 ): string[] {
   if (!text) return [];
-  const words = text.includes(" ") ? text.split(/\s+/) : Array.from(text);
+  const charWrap = /[\u3400-\u9fff]/u.test(text);
+  const words = charWrap ? Array.from(text) : text.split(/\s+/).filter(Boolean);
   const lines: string[] = [];
   let current = "";
 
   for (const word of words) {
-    const joiner = text.includes(" ") && current ? " " : "";
+    const joiner = !charWrap && current ? " " : "";
     const next = `${current}${joiner}${word}`;
     if (current && ctx.measureText(next).width > maxWidth) {
-      lines.push(current);
-      current = word;
+      lines.push(current.trimEnd());
+      current = charWrap ? word.trimStart() : word;
       while (ctx.measureText(current).width > maxWidth && current.length > 1) {
         const chars = Array.from(current);
         let left = "";
@@ -404,7 +490,7 @@ function wrapText(
       current = next;
     }
   }
-  if (current) lines.push(current);
+  if (current.trim()) lines.push(current.trim());
   return lines;
 }
 
