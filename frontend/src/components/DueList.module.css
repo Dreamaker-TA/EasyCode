@@ -1,0 +1,145 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xl);
+}
+
+/* 空态由共享 EmptyState 承担。 */
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.groupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 var(--sp-sm) var(--sp-sm);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+/* 优先级标记：只给标题与计数上 tone-fg 文字色；
+   分组底线保持中性——左色条仅属于严重度，此处禁用。 */
+.groupHeader h2 {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--tone-fg, var(--ink));
+}
+
+.groupHeader p {
+  margin: 4px 0 0;
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+}
+
+.groupHeader > span {
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+  color: var(--tone-fg, var(--ink-subtle));
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 96px 36px 90px;
+  align-items: center;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-sm);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+.row:hover {
+  background: var(--bg-soft);
+  text-decoration: none;
+}
+.id {
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 理由 + 本次目标合成一行截断；完整文案在 title 属性里。 */
+.reason {
+  font-size: var(--text-2sm);
+  color: var(--ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.category {
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+}
+
+/* 评级徽标复用 RatingBadge readOnly+compact。 */
+.badgeCell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overdue {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--danger);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.onTime {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .row {
+    grid-template-columns: 56px minmax(0, 1fr) 36px;
+    gap: var(--sp-sm);
+  }
+
+  .category,
+  .overdue,
+  .onTime {
+    grid-column: 2 / -1;
+    text-align: left;
+  }
+
+  .badgeCell {
+    justify-self: end;
+  }
+
+  /* 窄屏放开截断，允许标题与理由换行（列宽紧张时优先可读）。 */
+  .title,
+  .reason {
+    white-space: normal;
+    overflow: visible;
+    overflow-wrap: anywhere;
+  }
+}

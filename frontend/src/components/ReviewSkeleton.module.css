@@ -1,0 +1,54 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+/* shimmer 规格统一走 globals.css 的 .skeleton-bar / .skeleton-block；
+ * 这里只补该场景的尺寸（组件在 JSX 里叠加 skeleton-bar 全局类）。 */
+.bar {
+  height: 12px;
+}
+
+.barBadge {
+  width: 36px;
+  height: 36px;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--sp-sm) 0;
+  border-top: 1px solid var(--line);
+}
+.row:first-child {
+  border-top: 0;
+}
+
+.title {
+  width: 28%;
+  height: 11px;
+}
+
+.line {
+  width: 100%;
+}
+.lineShort {
+  width: 65%;
+}
+
+.caption {
+  margin-top: var(--sp-sm);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+  font-variant-numeric: tabular-nums;
+}

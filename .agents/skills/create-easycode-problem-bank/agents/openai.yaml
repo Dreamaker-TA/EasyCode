@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create EasyCode Problem"
+  short_description: "Build a validated problem-bank entry"
+  default_prompt: "Use $create-easycode-problem-bank to add a validated EasyCode problem about [topic]."

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 128,
+  "checker": "token",
+  "cases": [
+    {
+      "id": "sample-1",
+      "is_sample": true,
+      "stdin": "2 3\n",
+      "expected_stdout": "5\n",
+      "note": "正整数相加"
+    },
+    {
+      "id": "sample-2",
+      "is_sample": true,
+      "stdin": "0 0\n",
+      "expected_stdout": "0\n",
+      "note": "两个零"
+    },
+    {
+      "id": "hidden-1",
+      "is_sample": false,
+      "stdin": "-7 4\n",
+      "expected_stdout": "-3\n",
+      "note": "含负数"
+    },
+    {
+      "id": "hidden-2",
+      "is_sample": false,
+      "stdin": "100000 -100000\n",
+      "expected_stdout": "0\n",
+      "note": "约束边界"
+    },
+    {
+      "id": "hidden-3",
+      "is_sample": false,
+      "stdin": "-5 -6\n",
+      "expected_stdout": "-11\n",
+      "note": "两个负数"
+    }
+  ],
+  "templates": {
+    "python": "import sys\n\n\ndef solve(a: int, b: int) -> int:\n    # 在这里开始写你的代码\n    pass\n\n\ndef main() -> None:\n    a, b = map(int, sys.stdin.read().split())\n    print(solve(a, b))\n\n\nif __name__ == \"__main__\":\n    main()\n"
+  }
+}

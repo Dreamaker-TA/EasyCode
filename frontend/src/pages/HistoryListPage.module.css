@@ -1,0 +1,164 @@
+.page {
+  flex: 1;
+  width: 100%;
+  padding: var(--sp-3xl) max(var(--sp-xl), calc((100% - 1080px) / 2));
+  overflow-y: auto;
+  overscroll-behavior: none;
+  min-height: 0;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-display);
+  font-weight: 600;
+  margin: 0 0 var(--sp-xs) 0;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--ink-subtle);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 搜索行：复用共享 SearchBar，靠右不拉伸；窄屏由 SearchBar 自身占满。 */
+.searchRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--sp-md);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+/* 翻页控件语言对齐 HistoryPage：共享 Button（secondary·md）+ 等宽页码。 */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  margin-top: var(--sp-md);
+}
+
+.pagerStatus {
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px 80px 100px;
+  align-items: center;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-sm);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  transition: background-color var(--motion-fast);
+}
+.row:hover {
+  background: var(--bg-soft);
+  text-decoration: none;
+}
+
+.titleCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.titleMain {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.titleMeta {
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+}
+.summaryText {
+  margin-top: 3px;
+  font-size: var(--text-2sm);
+  color: var(--ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.core {
+  color: var(--accent);
+  margin-right: var(--sp-xs);
+}
+
+/* 评级徽标复用 RatingBadge readOnly+compact。 */
+.badgeCell {
+  display: flex;
+  justify-content: center;
+}
+
+.countCol {
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-subtle);
+  text-align: right;
+}
+.retried {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.timeCol {
+  font-size: var(--text-sm);
+  color: var(--ink-subtle);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.state {
+  padding: var(--sp-3xl);
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-subtle);
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: var(--sp-xl) var(--sp-md);
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr) 44px;
+    gap: var(--sp-sm);
+    padding: var(--sp-md) 0;
+  }
+
+  .badgeCell {
+    justify-content: flex-end;
+  }
+
+  .countCol,
+  .timeCol {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .titleMain {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .summaryText {
+    white-space: normal;
+  }
+}

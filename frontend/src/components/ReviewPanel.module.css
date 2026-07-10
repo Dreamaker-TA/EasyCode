@@ -1,0 +1,143 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xl);
+  min-width: 0;
+}
+
+/* 语气着色走全局 tone-* 词汇表（globals.css）。 */
+.stateBlock {
+  padding: var(--sp-md);
+  border: 1px solid var(--tone-border, var(--line));
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+}
+
+.stateLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--ink-subtle);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stateTitle,
+.stateBody {
+  margin: 0;
+}
+
+.stateTitle {
+  margin-top: 6px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.stateBody {
+  margin-top: var(--sp-xs);
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.idle {
+  padding: var(--sp-lg) 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--ink-subtle);
+}
+
+/* SSE 进度流退化说明：骨架屏上方一行功能性提示（warn 语气淡染，非装饰）。 */
+.progressFallbackNote {
+  margin: 0 0 var(--sp-md);
+  padding: var(--sp-sm) var(--sp-md);
+  border: 1px solid color-mix(in srgb, var(--warn) 36%, var(--line));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--warn) 6%, var(--bg-elevated));
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+/* === 历史页「精简/完整」切换：常驻关键信息头部 === */
+.reportBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-md);
+  padding-bottom: var(--sp-lg);
+  border-bottom: 1px solid var(--line);
+}
+
+.reportKey {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+.reportStats {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.reportControls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.segmented {
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+}
+
+.seg,
+.segOn {
+  min-height: 30px;
+  padding: 4px 14px;
+  border: 0;
+  border-radius: calc(var(--radius-sm) - 2px);
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: background var(--motion-fast), color var(--motion-fast);
+}
+
+.seg:hover {
+  color: var(--ink);
+}
+
+/* 选中态靠背景台阶（bg-soft→bg-elevated）+ 1px inset 描边区隔，不用抬升投影
+   。 */
+.segOn {
+  background: var(--bg-elevated);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+@media (max-width: 640px) {
+  .reportBar {
+    align-items: flex-start;
+  }
+
+  .reportControls {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

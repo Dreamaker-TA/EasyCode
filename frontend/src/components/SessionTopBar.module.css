@@ -1,0 +1,145 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-lg);
+  padding: 6px var(--sp-xl);
+  height: 36px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+/* 本局进行中：抬高一行，容纳计时器 + 阶段进度 + 动作按钮。 */
+.barTall {
+  height: auto;
+  min-height: 60px;
+  padding-top: var(--sp-sm);
+  padding-bottom: var(--sp-sm);
+}
+
+/* 返回按钮视觉由共享 Button（ghost·sm）承担；这里只留布局钩子。 */
+.backBtn {
+  flex-shrink: 0;
+}
+.arrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  line-height: 1;
+}
+
+/* ── 阶段进度：横向 stepper（弹性中段，空间不足时省略） ── */
+.stepper {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+.step {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 4px;
+  color: var(--ink-subtle);
+  white-space: nowrap;
+}
+.step:not(:first-child)::before {
+  content: "";
+  width: 12px;
+  height: 1px;
+  background: var(--line);
+  margin-right: 3px;
+}
+.stepDot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  line-height: 1;
+  color: var(--ink-subtle);
+  flex-shrink: 0;
+}
+.stepLabel {
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+}
+.stepDone .stepDot {
+  border-color: var(--accent-muted);
+  color: var(--accent);
+}
+.stepCurrent {
+  color: var(--ink);
+}
+.stepCurrent .stepDot {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--ink-on-accent);
+}
+.stepCurrent .stepLabel {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ── 右侧控制区：计时器 + 动作按钮 ── */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-lg);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.timer {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--sp-sm);
+  padding-right: var(--sp-lg);
+  border-right: 1px solid var(--line);
+}
+.timerLabel {
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--ink-subtle);
+  font-family: var(--font-sans);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+}
+.pausedBadge {
+  font-size: var(--text-2xs);
+  color: var(--warn);
+}
+.timerValue {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.timerSub {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+  font-variant-numeric: tabular-nums;
+}
+/* 计时器按钮视觉由共享 Button（secondary / ghost · sm）承担；这里只留布局钩子。 */
+.timerBtn {
+  align-self: center;
+}
+.timerOverdue .timerValue {
+  color: var(--danger);
+}
+.timerPaused .timerValue {
+  color: var(--ink-muted);
+}

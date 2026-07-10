@@ -1,0 +1,128 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  background: var(--bg);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2xl);
+  padding: 0 var(--sp-xl);
+  height: 52px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--sp-xs);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--font-serif);
+  letter-spacing: 0.01em;
+}
+.brand:hover {
+  text-decoration: none;
+}
+.brandMark {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+.brandSub {
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
+
+.navLinks {
+  display: flex;
+  gap: var(--sp-xl);
+  flex: 1;
+}
+.navLink {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+  padding: 4px 0;
+  border-bottom: 1.5px solid transparent;
+  text-decoration: none;
+  transition: color var(--motion-fast) var(--ease-standard);
+}
+.navLink:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+.navLinkActive {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.settingsLink {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+  padding: 4px 0;
+  border-bottom: 1.5px solid transparent;
+  text-decoration: none;
+  transition: color var(--motion-fast) var(--ease-standard);
+  white-space: nowrap;
+}
+
+.settingsLink:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.dueBadge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 6px;
+  min-width: 18px;
+  height: 16px;
+  line-height: 16px;
+  border-radius: var(--radius-lg);
+  background: var(--accent);
+  color: var(--ink-on-accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .nav {
+    height: auto;
+    min-height: 52px;
+    flex-wrap: wrap;
+  }
+
+  .nav {
+    gap: var(--sp-md);
+    padding: 0 var(--sp-md);
+  }
+
+  .brandSub {
+    display: none;
+  }
+
+  .navLinks {
+    gap: var(--sp-md);
+    order: 3;
+    flex-basis: 100%;
+    padding-bottom: var(--sp-sm);
+  }
+}

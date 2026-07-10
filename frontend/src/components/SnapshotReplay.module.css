@@ -1,0 +1,132 @@
+/* 学习者可见过程回放。纸感、低饱和、平滑。
+   外框（border/radius/overflow）由 HistoryPage 的 .detailCode > :nth-child(2) 提供。 */
+
+.replay {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--bg);
+  outline: none;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--sp-sm) var(--sp-md);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent) 4%, var(--bg-soft));
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+/* 播放按钮视觉由共享 Button（secondary·sm）承担；这里只留布局钩子。 */
+.playBtn {
+  flex: none;
+  min-width: 52px;
+}
+
+.slider {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+  --replay-progress: 0%;
+  height: 18px;
+  background: transparent;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent) 0 var(--replay-progress),
+      var(--line-strong) var(--replay-progress) 100%
+    );
+}
+
+.slider::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  margin-top: -4px;
+  border: 2px solid var(--bg-elevated);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, var(--line));
+}
+
+.slider::-moz-range-track {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--line-strong);
+}
+
+.slider::-moz-range-progress {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--bg-elevated);
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.counter {
+  flex: none;
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-subtle);
+}
+
+.frameLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+  color: var(--ink);
+}
+
+.marker {
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  color: var(--ink);
+  border: 1px solid color-mix(in srgb, var(--accent) 44%, var(--line));
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg-elevated));
+  border-radius: var(--radius-pill);
+  padding: 1px 8px;
+  white-space: nowrap;
+  animation: markerIn var(--motion-medium) var(--ease-standard);
+}
+
+@keyframes markerIn {
+  from {
+    opacity: 0;
+    transform: translateY(-1px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.state {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-lg);
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-subtle);
+  background: var(--bg);
+}

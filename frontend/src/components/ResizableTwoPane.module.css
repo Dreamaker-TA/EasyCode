@@ -1,0 +1,110 @@
+.group {
+  flex: 1;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.desktopNotice {
+  display: none;
+}
+
+.pane {
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.divider {
+  width: 1px;
+  background: var(--line);
+  align-self: stretch;
+  justify-self: center;
+}
+
+.handle {
+  background: transparent;
+  position: relative;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  outline: none;
+}
+.handle::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--line);
+  transform: translateX(-50%);
+  transition: background var(--motion-fast), transform var(--motion-fast);
+  pointer-events: none;
+}
+.handle:hover::before,
+.handle:active::before,
+.handle:focus-visible::before {
+  background: var(--accent);
+  transform: translateX(-50%) scaleX(2);
+}
+.handle:focus-visible {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+@media (max-width: 899px) {
+  .group {
+    display: block;
+    overflow-y: auto;
+    padding: var(--sp-xl);
+  }
+
+  .desktopNotice {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: var(--sp-2xl);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg-elevated);
+  }
+
+  .desktopNotice h2 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    line-height: 1.25;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0;
+  }
+
+  .desktopNotice p {
+    margin: var(--sp-sm) 0 0;
+    color: var(--ink-muted);
+    font-size: var(--text-base);
+    line-height: 1.65;
+  }
+
+  .pane,
+  .handle,
+  .divider {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .group {
+    padding: var(--sp-lg) var(--sp-md);
+  }
+
+  .desktopNotice {
+    padding: var(--sp-lg);
+  }
+}

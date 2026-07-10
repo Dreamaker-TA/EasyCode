@@ -1,0 +1,10 @@
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  padding: var(--sp-md) 0;
+}
+
+.heading {
+  margin-bottom: var(--sp-xs);
+}

@@ -1,0 +1,84 @@
+.workspace {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.editorRegion {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fallbackNotice {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 8px var(--sp-xl);
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--text-2sm);
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+
+/* 底部测试 console：作答区跑过样例后拉起，占约 38% 高，可滚动。 */
+.console {
+  flex: 0 0 auto;
+  max-height: 42%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+  background: var(--bg-soft);
+  min-height: 0;
+}
+.consoleHeader {
+  flex-shrink: 0;
+  padding: 8px var(--sp-xl);
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  border-bottom: 1px solid var(--line);
+}
+.consoleBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--sp-lg) var(--sp-xl);
+}
+
+/* 评测/复盘：右栏整块交给结果，可滚动。 */
+.reviewRegion {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.reviewScroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--sp-xl) var(--sp-2xl);
+}
+.reviewHeading {
+  margin: 0 0 var(--sp-lg);
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0;
+}
+.runtimeNote {
+  margin: 0 0 var(--sp-md);
+  padding: var(--sp-md) var(--sp-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--ink-muted);
+}

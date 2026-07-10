@@ -1,0 +1,206 @@
+/* 6 列基座：3 个指标各占 2 列铺满第一行；4 个面板各占 3 列 → 桌面 2×2 紧凑网格。
+   保持扁平（section > metric/panel > 内容 = 容器嵌套 2 层，设计规范）。 */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--sp-md);
+  margin: var(--sp-xl) 0;
+}
+
+.metric {
+  grid-column: span 2;
+}
+
+.panel {
+  grid-column: span 3;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.metric,
+.panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+}
+
+.metric {
+  min-height: 88px;
+  padding: var(--sp-md) var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metricValue {
+  font-family: var(--font-serif);
+  font-size: var(--text-display);
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.metricLabel {
+  margin-top: var(--sp-xs);
+  color: var(--ink-subtle);
+  font-size: var(--text-2sm);
+}
+
+/* 数据面纪律：面板内部行距/字号收紧一档（min-height、padding、标题下沿）。 */
+.panel {
+  min-height: 132px;
+  padding: var(--sp-md) var(--sp-lg);
+}
+
+.panelTitle {
+  margin: 0 0 var(--sp-sm);
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.dailyBars {
+  height: 76px;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: end;
+  gap: var(--sp-sm);
+}
+
+.day {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-xs);
+}
+
+.bar {
+  width: 100%;
+  max-width: 28px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: var(--accent-muted);
+  border: 1px solid var(--line-strong);
+}
+
+.dayLabel {
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.ratingRows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+
+.ratingRow {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 64px;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+/* 评级徽标复用 RatingBadge readOnly+compact。 */
+
+.track {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-soft);
+  overflow: hidden;
+}
+
+/* 分布条填充走评级色带（ratingColor → tone-* 词汇表），不再中性灰：
+   A=ok 实、B=ok-soft、C=warn、D=danger（--tone-mark 由行上的 tone 类提供）。 */
+.fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--tone-mark, var(--ink-muted));
+}
+
+.ratingCount {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+  color: var(--ink-muted);
+}
+
+.chips,
+.retryList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+
+.chip,
+.retryLink {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-sm);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+  padding: 6px 10px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.chip strong,
+.retryLink strong {
+  font-family: var(--font-mono);
+  color: var(--danger);
+}
+
+.retryLink span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.retryLink:hover {
+  background: var(--bg);
+  text-decoration: none;
+}
+
+.muted {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+/* 平板：指标 3 连排（各 2 列）保留，面板回落单列（各占满 6 列）。 */
+@media (max-width: 860px) {
+  .metric {
+    grid-column: span 2;
+  }
+
+  .panel {
+    grid-column: 1 / -1;
+  }
+}
+
+/* 窄屏：全部单列。 */
+@media (max-width: 560px) {
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .metric,
+  .panel {
+    grid-column: 1 / -1;
+  }
+}

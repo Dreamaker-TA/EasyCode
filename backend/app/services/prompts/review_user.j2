@@ -1,0 +1,97 @@
+# 题目
+
+{{ problem.title }}（{{ problem.category }}）{% if problem.is_core %}★ 核心题{% endif %}
+
+## 题面
+
+{{ problem.statement_md }}
+
+## 参考解（仅供你对照判断；**不得原样输出**到 process_review 或 optimization）
+
+{{ reference_solution_md }}
+
+## 学生最终提交的代码
+
+```{{ language }}
+{{ code }}
+```
+{% if test_results %}
+## 执行结果（**判定正确性的依据，优先于静态判断**）
+
+学生代码已在测试用例上实际执行：
+
+- 总判定 verdict = `{{ test_results.verdict }}`
+- 通过 **{{ test_results.passed }} / {{ test_results.total }}** 个用例{% if test_results.n_failures_total %}（共 {{ test_results.n_failures_total }} 个失败，下列至多 {{ test_results.failures | length }} 个）{% endif %}
+{% for f in test_results.failures %}
+### 失败用例 {{ f.id }}（{{ "样例" if f.is_sample else "隐藏用例" }} · {{ f.status }}）
+{% if f.is_sample %}
+输入：
+```
+{{ f.stdin }}
+```
+期望输出：
+```
+{{ f.expected }}
+```
+实际输出：
+```
+{{ f.actual }}
+```
+{% if f.stderr %}报错：
+```
+{{ f.stderr }}
+```
+{% endif %}
+{% else %}
+（隐藏用例，输入/输出不展示，仅知其失败。）
+{% endif %}
+{% endfor %}
+
+**判定规则**：先据执行结果定正确性 —— `verdict=OK` = 全部用例通过；`WRONG` = 有用例输出不符；`TLE` = 超时（往往复杂度过高）。再评风格 / 复杂度 / 过程。执行结果与你的静态猜测冲突时，**一律以执行结果为准**。
+{% endif %}
+{% if problem.grading_rubric_md %}
+## 本题正确性检查清单（逐条核对，作为该题正确性判断的依据）
+
+{{ problem.grading_rubric_md }}
+{% endif %}
+## 编写过程时间线（已抽样，共 {{ timeline | length }} 段）
+
+下面按时间顺序列出学生的写码过程。第一段给出完整代码;后续每段是相对上一段的 unified diff;
+若出现 `[t=Ns] 学生在此曾经提交一次` 这样的标注,说明该时刻是学生上一次提交的瞬间——请把
+它当作"上一轮思考的终点"，结合评级看接下来的修改是不是把问题修对了。
+
+{% for s in timeline -%}
+{% if s.kind == "full" %}
+### t={{ s.t }}s · 首帧代码
+
+```{{ language }}
+{{ s.code }}
+```
+{% elif s.kind == "diff" %}
+### t={{ s.t }}s · 相对上一段的改动
+
+```diff
+{{ s.diff_text }}
+```
+{% elif s.kind == "marker" %}
+> **[t={{ s.t }}s] 学生曾在这里提交过一次，上次自动评级为 `{{ s.rating }}`。** 之后是他继续修改的过程。
+{% endif %}
+{% endfor %}
+
+合计用时 {{ elapsed_sec }} 秒，模式 = {{ mode }}{% if mode_limit_sec %}（限时 {{ mode_limit_sec }} 秒）{% endif %}。
+
+{% if schema_json %}
+## 请严格按下面的 JSON 字段结构输出结果（最外层为对象）
+
+```json
+{{ schema_json }}
+```
+{% else %}
+## 输出要求
+
+本次响应必须严格遵循平台给出的 JSON 字段结构（最外层为对象），直接按该结构输出各字段。
+{% endif %}
+
+记住：**先填 `scratchpad`**（{% if test_results %}**先据上面的「执行结果」判定正确性、逐个诊断失败用例**，再补充{% endif %}手算 2–3 个用例 + 推导复杂度{% if problem.grading_rubric_md %} + 逐条核对上面的「本题正确性检查清单」{% endif %}），再据此填其余字段。
+
+只输出 JSON。不要前后追加任何说明文字。

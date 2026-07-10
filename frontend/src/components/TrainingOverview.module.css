@@ -1,0 +1,221 @@
+.panel {
+  border: 1px solid var(--line);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-xl);
+  margin-bottom: var(--sp-2xl);
+}
+
+/* 调度器状态语义由 kicker 前的 tone 色点承载。色点尺寸/形状对齐库内 toneDot 模式
+ * （ReviewOverview 的维度行圆点）。 */
+.kickerRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+}
+
+.toneMark {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tone-mark, var(--ink-subtle));
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--sp-xl);
+  align-items: center;
+  margin-bottom: var(--sp-xl);
+}
+
+.mission {
+  min-width: 0;
+}
+
+.title {
+  margin: var(--sp-xs) 0 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-display);
+  line-height: 1.16;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.copy {
+  max-width: 76ch;
+  margin: var(--sp-sm) 0 0;
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+  text-wrap: pretty;
+}
+
+/* 主 CTA 视觉由共享 Button（primary/danger·lg）承担；这里只留布局钩子。 */
+.primaryAction {
+  white-space: nowrap;
+}
+
+.factRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-md);
+}
+
+/* 事实 chip 语气描边走全局 tone-* 词汇表（globals.css），百分比全站统一。 */
+.fact {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  padding: 0 var(--sp-sm);
+  border: 1px solid var(--tone-border, var(--line));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--bg) 74%, var(--bg-soft));
+  color: var(--ink-muted);
+  font-size: var(--text-2sm);
+}
+
+.fact strong {
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--sp-md);
+}
+
+.tile {
+  min-height: 118px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+  grid-column: span 2;
+  min-width: 0;
+  padding: var(--sp-lg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  color: var(--ink);
+  text-decoration: none;
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard);
+}
+
+.tile:hover {
+  border-color: var(--line-strong);
+  background: var(--bg-soft);
+  text-decoration: none;
+}
+
+.dueTile {
+  background: color-mix(in srgb, var(--accent) 5%, var(--bg));
+}
+
+.recoveryTile {
+  border-color: color-mix(in srgb, var(--danger) 38%, var(--line));
+}
+
+.tileLabel {
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+}
+
+.tileValue {
+  min-height: 38px;
+  font-family: var(--font-mono);
+  font-size: var(--text-3xl);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.tileValue[data-changed="true"] {
+  animation: dueTick var(--motion-slow) var(--ease-standard);
+}
+
+.problemTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  line-height: 1.25;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.tileCopy {
+  margin-top: auto;
+  color: var(--ink-muted);
+  font-size: var(--text-2sm);
+  line-height: 1.45;
+}
+
+/* shimmer 规格统一走 globals.css 的 .skeleton-bar / .skeleton-block；
+ * 这里只补该场景尺寸（组件在 JSX 里叠加全局骨架类）。 */
+.loadingLine {
+  width: min(520px, 80%);
+  height: 30px;
+  margin-top: var(--sp-sm);
+}
+
+.loadingGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-md);
+  margin-top: var(--sp-xl);
+}
+
+.loadingGrid span {
+  height: 96px;
+  border-radius: var(--radius-md);
+}
+
+@keyframes dueTick {
+  from {
+    opacity: 0.58;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .header {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .primaryAction {
+    width: 100%;
+  }
+
+  .grid,
+  .loadingGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tile {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .panel {
+    padding: var(--sp-lg);
+  }
+
+  .title {
+    font-size: var(--text-2xl);
+  }
+
+  .grid,
+  .loadingGrid {
+    grid-template-columns: 1fr;
+  }
+}

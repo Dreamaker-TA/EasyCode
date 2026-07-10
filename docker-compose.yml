@@ -1,0 +1,37 @@
+# EasyCode 一键启动。
+#   docker compose up --build  → http://localhost:8000
+#   可在仓库根建 .env 覆盖 LLM_* / CORS_ORIGINS / EXECUTOR 等配置。
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: easycode:latest
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      # ${VAR:-默认}：docker compose 自动读仓库根 .env 做插值。
+      APP_ENV: ${APP_ENV:-production}
+      EXECUTOR: ${EXECUTOR:-pyodide}
+      LLM_BASE_URL: ${LLM_BASE_URL:-https://api.deepseek.com}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-deepseek-v4-flash}
+      LLM_STRUCTURED_OUTPUT: ${LLM_STRUCTURED_OUTPUT:-auto}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:8000}
+      EASYCODE_SETTINGS_PATH: /data/easycode.env
+      # SQLite 与摄取产物落在数据卷；题库目录通过只读 bind mount 注入。
+      DB_PATH: /data/easycode.db
+      EASYCODE_PROBLEM_BANK_ROOT: /problem-bank
+      EASYCODE_PROBLEMS_JSON_PATH: /data/problems.json
+    volumes:
+      - easycode-data:/data
+      - ${PROBLEM_BANK_HOST_PATH:-./examples/problem-bank}:/problem-bank:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/healthz').status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  easycode-data:

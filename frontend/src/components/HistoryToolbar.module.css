@@ -1,0 +1,124 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  padding: var(--sp-sm) 0;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--sp-sm);
+  flex-wrap: wrap;
+}
+
+.chips {
+  display: flex;
+  gap: var(--sp-xs);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 4px 12px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: color var(--motion-fast), border-color var(--motion-fast), background var(--motion-fast);
+}
+.chip:hover:not(:disabled) {
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+.chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.chipOn {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+}
+.chipOn:hover {
+  color: var(--accent);
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+  font-variant-numeric: tabular-nums;
+}
+.chipOn .count {
+  color: var(--accent);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.selectedHint {
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.linkBtn {
+  background: transparent;
+  border: 0;
+  padding: 4px 6px;
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  color: var(--ink-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+  transition: color var(--motion-fast), text-decoration-color var(--motion-fast);
+}
+.linkBtn:hover:not(:disabled) {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+.linkBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+/* 动作按钮视觉由共享 Button（secondary / danger · md）承担。 */
+
+@media (max-width: 620px) {
+  .bar,
+  .chips,
+  .actions {
+    width: 100%;
+  }
+
+  .chips {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .chip,
+  .actions > button,
+  .linkBtn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .selectedHint {
+    text-align: center;
+  }
+}

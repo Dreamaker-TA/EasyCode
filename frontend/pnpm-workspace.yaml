@@ -1,0 +1,8 @@
+packages:
+  - "."
+
+allowBuilds:
+  esbuild: true
+
+overrides:
+  dompurify: 3.4.11

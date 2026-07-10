@@ -1,0 +1,169 @@
+.page {
+  flex: 1;
+  width: 100%;
+  padding: var(--sp-3xl) max(var(--sp-xl), calc((100% - 1080px) / 2));
+  overflow-y: auto;
+  overscroll-behavior: none;
+  min-height: 0;
+}
+
+.head {
+  margin-bottom: var(--sp-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+}
+
+.crumbs {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+}
+.crumbLink {
+  color: var(--ink-subtle);
+  text-decoration: none;
+}
+.crumbLink:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+.crumbSep {
+  color: var(--ink-subtle);
+}
+/* 回到题目：从题目点进历史，用户多半想回到题目 —— 作主操作加粗、加深，与「历史」明显区隔。 */
+.crumbPrimary {
+  color: var(--ink);
+  font-weight: 600;
+}
+.crumbPrimary:hover {
+  color: var(--accent);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-lg);
+}
+
+.title {
+  min-width: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-display);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.practiceAction {
+  flex: 0 0 auto;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--ink-subtle);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+.state {
+  padding: var(--sp-3xl);
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-subtle);
+}
+
+/* 全宽单列：报告在上、代码在下，不再左右分栏。 */
+.detail {
+  margin-top: var(--sp-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2xl);
+}
+
+.detailCode {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  min-height: 0;
+}
+.detailCode > :nth-child(2) {
+  /* 回放编辑器需要稳定的「确定」高度：Monaco 内部 height:100% 链要靠祖先的确定高度解析，
+     用 min-height 不算确定高度，会导致编辑器塌成一行（约 5px）。 */
+  height: 420px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.detailLabel {
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.detailReview {
+  min-width: 0;
+}
+
+/* 提交记录翻页控件 */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  margin-top: var(--sp-md);
+}
+/* 翻页按钮视觉由共享 Button（secondary·md）承担。 */
+.pagerStatus {
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.detailState {
+  padding: var(--sp-lg);
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-subtle);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: var(--sp-xl) var(--sp-md);
+  }
+
+  .crumbs {
+    flex-wrap: wrap;
+  }
+
+  .titleRow {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--sp-sm);
+  }
+
+  .title {
+    font-size: var(--text-2xl);
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .detail {
+    gap: var(--sp-lg);
+  }
+
+  .detailCode > :nth-child(2) {
+    height: 300px;
+  }
+}

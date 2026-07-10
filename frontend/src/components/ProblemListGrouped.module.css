@@ -1,0 +1,148 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3xl);
+}
+
+/* 空态由共享 EmptyState 承担。 */
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+.groupHeader {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-md);
+  padding-bottom: var(--sp-sm);
+  border-bottom: 1px solid var(--line);
+}
+.chapterNo {
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  color: var(--ink-subtle);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.category {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink);
+}
+.groupCount {
+  margin-left: auto;
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 36px 56px 1fr auto auto;
+  align-items: center;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-sm);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: var(--text-base);
+  transition: background var(--motion-fast);
+}
+.item:hover {
+  background: var(--bg-soft);
+  text-decoration: none;
+}
+
+.problemNo {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.id {
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  color: var(--ink);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.core {
+  color: var(--accent);
+  font-size: var(--text-2sm);
+}
+
+/* 评级徽标复用 RatingBadge readOnly+compact。 */
+
+@media (max-width: 560px) {
+  .wrap {
+    gap: var(--sp-2xl);
+  }
+
+  .groupHeader {
+    flex-wrap: wrap;
+    gap: var(--sp-xs) var(--sp-sm);
+  }
+
+  .category {
+    flex-basis: 100%;
+    order: 3;
+    font-size: var(--text-lg);
+  }
+
+  .item {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    gap: 2px var(--sp-sm);
+    align-items: start;
+    padding: var(--sp-md) 0;
+  }
+
+  .problemNo {
+    grid-row: 1 / 3;
+    padding-top: 3px;
+  }
+
+  .id {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .title {
+    grid-column: 2;
+    grid-row: 1;
+    line-height: 1.35;
+  }
+
+  .core,
+  .badge {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .core {
+    grid-row: 1;
+  }
+
+  .badge {
+    grid-row: 2;
+  }
+}

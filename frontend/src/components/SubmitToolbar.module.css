@@ -1,0 +1,29 @@
+/* 按钮视觉由共享 Button（primary / secondary · lg）承担；这里只留排序与说明布局。 */
+
+.wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-md);
+}
+
+.submit {
+  order: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.run {
+  order: 2;
+}
+
+.help {
+  order: 3;
+}
+
+.note {
+  order: 5;
+  flex-basis: 100%;
+  font-size: var(--text-2sm);
+  line-height: 1.5;
+  color: var(--ink-muted);
+}

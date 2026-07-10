@@ -1,0 +1,82 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.student {
+  align-items: flex-end;
+}
+
+.tutor {
+  align-items: flex-start;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  max-width: min(100%, 560px);
+  color: var(--ink-subtle);
+}
+
+.role {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.bubble {
+  max-width: min(100%, 620px);
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.student .bubble {
+  background: var(--bg-soft);
+  border-color: var(--line-strong);
+}
+
+.bubble p {
+  margin: 0;
+}
+
+.pending .bubble {
+  border-style: dashed;
+}
+
+.empty {
+  margin: 0;
+  padding: var(--sp-lg);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-md);
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+  .student,
+  .tutor {
+    align-items: stretch;
+  }
+
+  .meta,
+  .bubble {
+    max-width: 100%;
+  }
+}

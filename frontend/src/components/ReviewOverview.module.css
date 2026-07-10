@@ -1,0 +1,208 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-lg);
+  min-width: 0;
+}
+
+/* 语气着色走全局 tone-* 词汇表（globals.css），处方卡消费统一的描边/淡染变量。 */
+.prescription {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--sp-md);
+  align-items: start;
+  padding: var(--sp-lg);
+  border: 1px solid var(--tone-border, var(--line));
+  border-radius: var(--radius-md);
+  background: var(--tone-surface, var(--bg-elevated));
+}
+
+
+.prescriptionTitle,
+.prescriptionDetail,
+.scheduleTitle,
+.scheduleDetail,
+.diagnosis p,
+.dimensionItem p {
+  margin: 0;
+}
+
+.prescriptionTitle {
+  margin-top: var(--sp-xs);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  line-height: 1.3;
+}
+
+.prescriptionDetail,
+.scheduleDetail,
+.diagnosis p,
+.dimensionItem p {
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.prescriptionMeta {
+  justify-self: end;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink-muted);
+  background: var(--bg);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.topGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.78fr);
+  gap: var(--sp-lg);
+  align-items: stretch;
+}
+
+.resultStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  min-width: 0;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  min-width: 0;
+  padding: var(--sp-md);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+}
+
+.ratingMeta {
+  min-width: 0;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm) var(--sp-md);
+  margin-top: 2px;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnosis,
+.schedule,
+.radarPanel {
+  padding: var(--sp-lg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  min-width: 0;
+}
+
+.diagnosis p {
+  margin-top: 6px;
+  color: var(--ink);
+}
+
+.scheduleTitle {
+  margin-top: 6px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 700;
+}
+
+.scheduleDetail {
+  margin-top: var(--sp-xs);
+}
+
+.radarPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: color-mix(in srgb, var(--accent) 18%, var(--line));
+}
+
+.dimensionGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--sp-sm);
+}
+
+.dimensionItem {
+  min-width: 0;
+  padding: var(--sp-md);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard);
+}
+
+.dimensionItem:hover {
+  border-color: var(--line-strong);
+  background: var(--bg-soft);
+}
+
+.dimensionHead {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  font-weight: 700;
+}
+
+.dimensionValue {
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.toneDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tone-mark, var(--ink-subtle));
+}
+
+.dimensionItem p {
+  margin-top: 6px;
+}
+
+@media (max-width: 960px) {
+  .dimensionGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .topGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .prescription {
+    grid-template-columns: 1fr;
+  }
+
+  .prescriptionMeta {
+    justify-self: start;
+  }
+
+  .dimensionGrid {
+    grid-template-columns: 1fr;
+  }
+}

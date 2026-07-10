@@ -1,0 +1,18 @@
+/*
+ * 这些类名被 Monaco 应用在它自己的 DOM 内（通过 decoration 的 className），
+ * 所以必须是全局、稳定的类名——不能走 CSS Modules 的 hash。
+ * 整行底色 + 左侧细条，低透明度以契合纸感；颜色用主题变量（随明暗主题联动）。
+ */
+
+.ec-diff-line-add {
+  /* 新增行：苔绿 tint，透明度压到与暖纸 / 暖墨底色协调（编辑器 chrome 现由
+     easycode-paper / easycode-ink 主题托管，底色更暖，故 tint 放轻一档）。 */
+  background: color-mix(in srgb, var(--success) 12%, transparent);
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--success) 72%, transparent);
+}
+
+.ec-diff-line-change {
+  /* 变化行：赤陶 tint（与光标 / accent 同族）。 */
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--accent) 72%, transparent);
+}

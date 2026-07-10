@@ -1,0 +1,104 @@
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  gap: var(--sp-xl);
+  align-items: center;
+  margin-bottom: var(--sp-xl);
+  padding: var(--sp-xl);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+}
+
+.copy {
+  min-width: 0;
+}
+
+.title {
+  margin: var(--sp-xs) 0 0;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.description {
+  margin: var(--sp-xs) 0 0;
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-sm);
+  padding: var(--sp-xs);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+}
+
+.option {
+  position: relative;
+  display: grid;
+  min-height: 84px;
+  gap: var(--sp-xs);
+  padding: var(--sp-md);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
+}
+
+.option:hover {
+  color: var(--ink);
+  background: var(--bg-soft);
+}
+
+.optionSelected {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+  background: var(--bg-elevated);
+  color: var(--ink);
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.input:focus-visible + .optionLabel {
+  outline: 3px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.optionLabel {
+  color: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.optionDescription {
+  color: var(--ink-muted);
+  font-size: var(--text-2sm);
+  line-height: 1.45;
+}
+
+@media (max-width: 760px) {
+  .panel {
+    grid-template-columns: 1fr;
+    padding: var(--sp-lg);
+  }
+
+  .segmented {
+    grid-template-columns: 1fr;
+  }
+}

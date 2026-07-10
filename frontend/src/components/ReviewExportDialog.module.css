@@ -1,0 +1,150 @@
+.dialog {
+  width: min(680px, calc(100vw - 32px));
+}
+
+.header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  padding: var(--sp-lg) var(--sp-lg) var(--sp-md);
+  border-bottom: 1px solid var(--line);
+}
+
+.title {
+  margin: 4px 0 0;
+  color: var(--ink);
+  font-size: var(--text-lg);
+  line-height: 1.35;
+}
+
+/* 关闭控件视觉由共享 Button（secondary·md）承担；这里只留方形布局钩子。 */
+.closeButton {
+  width: 36px;
+  flex: 0 0 auto;
+  padding: 0;
+  font-size: var(--text-xl);
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-xs);
+  padding: var(--sp-md) var(--sp-lg) 0;
+}
+
+.tab,
+.tabActive {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}
+
+.tab {
+  background: var(--bg);
+  color: var(--ink-muted);
+}
+
+.tabActive {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  padding: var(--sp-lg);
+}
+
+.checkRow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--sp-sm);
+  align-items: start;
+  padding: var(--sp-md);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+}
+
+.checkRow input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--accent);
+}
+
+.checkRow strong {
+  display: block;
+  color: var(--ink);
+  font-size: var(--text-sm);
+}
+
+.checkRow small {
+  display: block;
+  margin-top: 3px;
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.previewFrame {
+  aspect-ratio: 1200 / 630;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  color: var(--ink-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.error {
+  margin: 0;
+  color: var(--danger);
+  font-size: var(--text-sm);
+}
+
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+  justify-content: flex-end;
+}
+
+/* 动作按钮视觉由共享 Button（primary / secondary · lg）承担。 */
+
+@media (max-width: 520px) {
+  .header,
+  .panel {
+    padding-left: var(--sp-md);
+    padding-right: var(--sp-md);
+  }
+
+  .tabs {
+    padding-left: var(--sp-md);
+    padding-right: var(--sp-md);
+  }
+
+  .actionRow {
+    flex-direction: column;
+  }
+
+  .actionRow > * {
+    width: 100%;
+  }
+}

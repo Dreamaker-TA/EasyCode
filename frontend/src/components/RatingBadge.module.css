@@ -1,0 +1,181 @@
+/* 评级的唯一交互/展示实现；其余组件用 readOnly 模式复用，禁止再造静态徽标。
+ * 取色走全局 tone 词汇表（globals.css tone-*）：A 实心 / B 淡染浅描边 / C·D 描边。 */
+
+.wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 var(--sp-sm);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--tone-fg, var(--ink-subtle));
+  border: 1.5px solid currentColor;
+  background: transparent;
+  font-variant-numeric: tabular-nums;
+  position: relative;
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
+}
+
+/* A = ok 绿·实心（稳固通过的"盖章"档）。 */
+.solid {
+  background: var(--tone-mark);
+  border-color: var(--tone-mark);
+  color: var(--ink-on-accent);
+}
+
+/* B = ok 绿·浅档：淡染底 + 浅描边，与 A 同族可区分。 */
+.soft {
+  background: var(--tone-surface);
+  border-color: var(--tone-mark);
+}
+
+/* C / D 维持纯描边（outline 档无额外规则）。 */
+
+/* 紧凑档：列表行内 22px（SubmissionList / DueList / HistoryListPage 复用）。 */
+.compact {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  font-size: var(--text-2sm);
+  border-width: 1px;
+}
+
+.letter {
+  display: inline-block;
+}
+
+.stampReady {
+  animation: gradeStamp var(--motion-slow) var(--ease-standard) both;
+}
+
+.stampReady .letter {
+  animation: gradeLetter var(--motion-slow) var(--ease-standard) both;
+}
+
+button.badge {
+  cursor: pointer;
+}
+button.badge:hover:not(:disabled) {
+  background: var(--tone-surface, var(--bg-soft));
+}
+button.solid:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--tone-mark) 88%, var(--ink));
+}
+.badge[disabled] {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.overrideDot {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border: 1.5px solid var(--bg);
+  border-radius: 50%;
+}
+
+.compact .overrideDot {
+  top: -2px;
+  right: -2px;
+  width: 6px;
+  height: 6px;
+  border-width: 1px;
+}
+
+.menu {
+  position: fixed;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  width: 190px;
+  padding: var(--sp-xs);
+  background: var(--bg-elevated);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding: 6px 10px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--ink);
+  text-align: left;
+  border-radius: var(--radius-sm);
+}
+.option:hover {
+  background: var(--bg-soft);
+}
+.option:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  outline-offset: 1px;
+  background: var(--bg-soft);
+}
+.option:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.optionLetter {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  width: 26px;
+  text-align: center;
+  color: var(--tone-fg, var(--ink-muted));
+}
+.optionHint {
+  margin-left: auto;
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+  font-style: italic;
+}
+
+.divider {
+  height: 1px;
+  background: var(--line);
+  margin: var(--sp-xs) 0;
+}
+
+@keyframes gradeStamp {
+  from {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--tone-mark, currentColor) 24%, transparent);
+    transform: scale(1.08) rotate(-1deg);
+  }
+  to {
+    box-shadow: 0 0 0 3px transparent;
+    transform: none;
+  }
+}
+
+@keyframes gradeLetter {
+  from {
+    opacity: 0.72;
+    transform: translateY(1px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

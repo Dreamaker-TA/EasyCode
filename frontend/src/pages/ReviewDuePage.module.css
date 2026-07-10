@@ -1,0 +1,79 @@
+.page {
+  flex: 1;
+  width: 100%;
+  padding: var(--sp-3xl) max(var(--sp-xl), calc((100% - 920px) / 2));
+  overflow-y: auto;
+  overscroll-behavior: none;
+  min-height: 0;
+}
+
+.head {
+  margin-bottom: var(--sp-xl);
+}
+
+/* 回到题目导览：从题目结算面板点「查看复习计划」进来时出现，用户看完节奏多半想回到本局。 */
+.crumbs {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+}
+.crumbLink {
+  color: var(--ink-subtle);
+  text-decoration: none;
+}
+.crumbLink:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+.crumbPrimary {
+  color: var(--ink);
+  font-weight: 600;
+}
+.crumbPrimary:hover {
+  color: var(--accent);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-display);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: var(--ink-subtle);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+.state {
+  padding: var(--sp-3xl);
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-subtle);
+}
+
+/* 数据到达前的骨架区（消除 flash-of-empty）。 */
+.loadingRegion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xl);
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: var(--sp-xl) var(--sp-md);
+  }
+
+  .title {
+    font-size: var(--text-2xl);
+    line-height: 1.25;
+  }
+}

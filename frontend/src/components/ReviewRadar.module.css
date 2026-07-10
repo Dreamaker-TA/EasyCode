@@ -1,0 +1,116 @@
+.wrap {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-xs);
+  min-width: 0;
+}
+
+.svg {
+  width: min(100%, 250px);
+  aspect-ratio: 1;
+  overflow: visible;
+}
+
+.grid {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+  opacity: 0.78;
+}
+
+.axis {
+  stroke: var(--line);
+  stroke-width: 1;
+  opacity: 0.68;
+}
+
+.fill {
+  fill: color-mix(in srgb, var(--accent) 16%, transparent);
+  stroke: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  /* 揭示缓动（ease-enter）：起步快、收束绵长，从中心舒展开来。 */
+  animation: radarFill var(--motion-reveal) var(--ease-enter) var(--motion-fast) both;
+}
+
+.line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.25;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 560;
+  /* 轮廓沿边缓缓描出，与填充同频。 */
+  animation: radarLine calc(var(--motion-reveal) * 1.25) var(--ease-enter) both;
+}
+
+/* 圆点着色走全局 tone-* 词汇表（globals.css）：--tone-mark 承载 A 实 / B 浅（ok-soft）的档差。 */
+.dot {
+  fill: var(--bg-elevated);
+  stroke: var(--tone-mark, var(--ink-subtle));
+  stroke-width: 2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  /* 回弹（ease-spring）：轻微过冲，原地"落定"般弹入；逐点错峰（延迟见 TSX）。 */
+  animation: radarDot calc(var(--motion-reveal) * 0.6) var(--ease-spring) both;
+}
+
+.label {
+  fill: var(--ink-muted);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  opacity: 0;
+  animation: radarLabel calc(var(--motion-reveal) * 0.45) var(--ease-standard) both;
+}
+
+@keyframes radarFill {
+  from {
+    opacity: 0;
+    transform: scale(0.62);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes radarLine {
+  from {
+    stroke-dashoffset: 560;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes radarDot {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.22);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes radarLabel {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

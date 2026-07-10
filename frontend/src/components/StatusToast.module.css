@@ -1,0 +1,59 @@
+/* 底部居中视口：固定层，仅承载单条 toast，点击穿透由 toast 自身接管。 */
+.viewport {
+  position: fixed;
+  left: 50%;
+  bottom: var(--sp-xl);
+  transform: translateX(-50%);
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  max-width: calc(100vw - 2 * var(--sp-lg));
+}
+
+/* 纸面卡片：1px 边框 + 全站唯一真投影 --shadow-pop。 */
+.toast {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding: 10px var(--sp-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop);
+  cursor: default;
+  animation: toast-enter var(--motion-medium) var(--ease-enter);
+}
+
+.mark {
+  color: var(--success);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+.message {
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+}
+
+/* 等宽数字：toast 里的计数（「已删除 N 条记录」）走 tabular-nums。 */
+.message :global(.tnum) {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

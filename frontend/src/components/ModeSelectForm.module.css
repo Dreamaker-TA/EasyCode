@@ -1,0 +1,174 @@
+.root {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-2xl);
+}
+
+.card {
+  width: 100%;
+  max-width: 460px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  margin: 6px 0 0;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.subtitle {
+  margin: 4px 0 var(--sp-xl);
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-md);
+}
+
+/* 残留会话提示：accent 描边 + 淡染做强调。 */
+.residual {
+  margin-bottom: var(--sp-xl);
+  padding: var(--sp-lg);
+  background: color-mix(in srgb, var(--accent) 6%, var(--bg-elevated));
+  border: 1px solid color-mix(in srgb, var(--accent) 36%, var(--line));
+  border-radius: var(--radius-md);
+}
+.residualText {
+  margin: 0 0 var(--sp-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+.residualText strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+/* 动作按钮视觉由共享 Button（primary / secondary · md）承担。 */
+.residualActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-md);
+}
+/* 已选「新建一局」：当前态高亮（accent = 当前态，设计规范），仍可点「继续作答」反悔。 */
+.residualGhostOn,
+.residualGhostOn:hover:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+}
+/* 断点续答门控：残留未决时，整组模式/语言/IO 灰掉锁定（fieldset 原生禁用内部所有控件）。 */
+.group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+.group:disabled {
+  opacity: 0.4;
+}
+
+.field {
+  margin-bottom: var(--sp-lg);
+}
+
+.fieldLabel {
+  display: block;
+  font-size: var(--text-2sm);
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  font-family: var(--font-sans);
+  margin-bottom: var(--sp-sm);
+}
+
+.modeRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-md);
+}
+.modeBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-xs);
+  padding: var(--sp-lg);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--motion-fast), background var(--motion-fast);
+  min-height: 92px;
+}
+.modeBtn:hover {
+  border-color: var(--accent-muted);
+}
+.modeBtnOn {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+}
+.modeLabel {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink);
+}
+.modeBtnOn .modeLabel {
+  color: var(--accent);
+}
+.modeHint {
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+}
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-xs);
+}
+.preset {
+  min-height: 36px;
+  padding: 4px 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+  color: var(--ink-muted);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--motion-fast), border-color var(--motion-fast);
+}
+.preset:hover {
+  color: var(--ink);
+}
+.presetOn {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.langHint {
+  margin: var(--sp-sm) 0 0;
+  color: var(--ink-muted);
+  font-size: var(--text-2sm);
+  line-height: 1.5;
+}
+
+/* 主 CTA 视觉由共享 Button（primary·lg·block）承担；这里只留布局钩子。 */
+.confirm {
+  margin-top: var(--sp-sm);
+}
+
+.note {
+  margin: var(--sp-lg) 0 0;
+  font-size: var(--text-2sm);
+  line-height: 1.6;
+  color: var(--ink-subtle);
+  font-family: var(--font-serif);
+  font-style: italic;
+}

@@ -1,0 +1,104 @@
+.summary {
+  display: grid;
+  grid-template-columns: 132px 132px minmax(0, 1fr);
+  gap: var(--sp-md);
+  align-items: stretch;
+  margin-bottom: var(--sp-xl);
+}
+
+.metric,
+.plan {
+  border: 1px solid var(--line);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+}
+
+.metric {
+  min-height: 112px;
+  padding: var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metricValue {
+  font-family: var(--font-serif);
+  font-size: var(--text-display);
+  line-height: 1;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.metricLabel {
+  margin-top: var(--sp-sm);
+  color: var(--ink-subtle);
+  font-size: var(--text-2sm);
+}
+
+.plan {
+  min-height: 112px;
+  padding: var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-md);
+}
+
+.planTitle {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.planText {
+  margin: 0;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+.priorityGrid,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+}
+
+/* 动作链接视觉由共享 Button（primary / secondary · md，as="link"）承担。 */
+/* 优先级淡染走全局 tone-* 词汇表（priorityTone → surface 底 + border 描边 + fg 文字）；
+   neutral 走 tone-neutral 回落中性灰。 */
+.priorityPill {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  border-radius: var(--radius-md);
+  padding: 6px 10px;
+  font-size: var(--text-2sm);
+  text-decoration: none;
+  border: 1px solid var(--tone-border, var(--line));
+  color: var(--tone-fg, var(--ink-muted));
+  background: var(--tone-surface, var(--bg-soft));
+}
+
+.priorityPill strong {
+  color: var(--tone-fg, var(--ink));
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 760px) {
+  .summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .plan {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .summary {
+    grid-template-columns: 1fr;
+  }
+}

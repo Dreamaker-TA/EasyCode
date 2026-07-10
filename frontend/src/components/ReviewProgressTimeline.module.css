@@ -1,0 +1,140 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  min-width: 0;
+  padding: var(--sp-md);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  margin-top: var(--sp-xs);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.elapsed {
+  flex: 0 0 auto;
+  min-width: 44px;
+  padding: 4px 7px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink-muted);
+  background: var(--bg-elevated);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: var(--sp-sm);
+  min-width: 0;
+  padding: 0 0 var(--sp-md);
+}
+
+.step:last-child {
+  padding-bottom: 0;
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  top: var(--sp-lg);
+  bottom: 0;
+  left: 6px;
+  width: 1px;
+  background: var(--line);
+}
+
+.step:last-child::before {
+  display: none;
+}
+
+.marker {
+  width: 13px;
+  height: 13px;
+  margin-top: 2px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  transition: transform var(--motion-medium) var(--ease-standard), background var(--motion-medium) var(--ease-standard), border-color var(--motion-medium) var(--ease-standard);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.copy strong {
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  line-height: 1.35;
+}
+
+.copy span {
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.step_done .marker {
+  border-color: color-mix(in srgb, var(--success) 62%, var(--line));
+  background: var(--success);
+}
+
+.step_active .marker {
+  border-color: var(--accent);
+  background: var(--accent);
+  transform: scale(1.12);
+}
+
+.step_active .copy strong {
+  color: var(--accent);
+}
+
+.step_pending {
+  opacity: 0.72;
+}
+
+@media (max-width: 520px) {
+  .head {
+    flex-direction: column;
+    gap: var(--sp-sm);
+  }
+
+  .elapsed {
+    align-self: flex-start;
+  }
+}

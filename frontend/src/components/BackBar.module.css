@@ -1,0 +1,16 @@
+.bar {
+  display: flex;
+  align-items: center;
+  padding: 6px var(--sp-xl);
+  height: 36px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+/* 返回按钮视觉由共享 Button（ghost·sm）承担。 */
+.arrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  line-height: 1;
+}

@@ -1,0 +1,118 @@
+.footer {
+  margin-top: var(--sp-sm);
+  padding-top: var(--sp-lg);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+
+.primarySlot {
+  display: flex;
+}
+
+/* 语气着色走全局 tone-* 词汇表（globals.css）。 */
+.prescription {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--sp-md);
+  align-items: start;
+  padding: var(--sp-md);
+  border: 1px solid var(--tone-border, var(--line));
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+}
+
+.prescriptionLabel,
+.prescriptionTitle,
+.prescriptionDetail {
+  margin: 0;
+}
+
+.prescriptionLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--ink-subtle);
+  letter-spacing: 0.06em;
+}
+
+.prescriptionTitle {
+  margin-top: var(--sp-xs);
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.prescriptionDetail {
+  margin-top: var(--sp-xs);
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.prescriptionMeta {
+  justify-self: end;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink-muted);
+  background: var(--bg);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.secondaryRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-sm);
+}
+
+.menuWrap {
+  position: relative;
+  min-width: 0;
+}
+
+.exportMenu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  width: min(220px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+  padding: var(--sp-xs);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-pop);
+}
+
+.exportMenu button {
+  min-height: 38px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-align: left;
+}
+
+.exportMenu button:hover,
+.exportMenu button:focus-visible {
+  background: var(--bg-soft);
+}
+
+@media (max-width: 520px) {
+  .prescription {
+    grid-template-columns: 1fr;
+  }
+
+  .prescriptionMeta {
+    justify-self: start;
+  }
+}

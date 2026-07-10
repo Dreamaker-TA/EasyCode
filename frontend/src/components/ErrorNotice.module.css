@@ -1,0 +1,87 @@
+.notice {
+  display: flex;
+  gap: var(--sp-md);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  color: var(--ink);
+}
+
+.inline {
+  padding: var(--sp-md);
+}
+
+.panel {
+  padding: var(--sp-lg);
+}
+
+.marker {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--ink-subtle);
+}
+
+.tone_info .marker {
+  background: var(--accent);
+}
+
+.tone_warning .marker {
+  background: var(--warn);
+}
+
+.tone_danger .marker {
+  background: var(--danger);
+}
+
+.content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-sm);
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.kind {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+}
+
+.message {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+}
+
+/* 动作按钮视觉由共享 Button（primary / secondary · sm）承担。 */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+  padding-top: 2px;
+}

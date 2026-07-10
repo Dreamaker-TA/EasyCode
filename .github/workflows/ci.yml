@@ -1,0 +1,58 @@
+name: CI
+
+# 发布树审计、前端构建/bundle 预算、后端运行检查并行执行。
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  public-tree:
+    name: Public tree audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/audit_public_tree.py
+
+  frontend:
+    name: Frontend (audit + typecheck + build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      # pnpm 必须先装，setup-node 的 `cache: pnpm` 才能在 PATH 找到 pnpm
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --audit-level low
+      - run: pnpm typecheck
+      - run: pnpm build
+      - name: Check frontend bundle budget
+        run: cd .. && node scripts/check_frontend_bundle.mjs
+
+  backend:
+    name: Backend (audit + runtime check)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "backend/uv.lock"
+          python-version: "3.12"
+      - run: uv sync --frozen --no-dev
+      - run: uvx pip-audit --path .venv/lib/python3.12/site-packages --progress-spinner off
+      - name: Verify ingest, migrations, seed, and core API
+        run: cd .. && make runtime-check

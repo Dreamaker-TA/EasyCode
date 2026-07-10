@@ -1,0 +1,192 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  z-index: 1000;
+  animation: fadeIn var(--motion-fast) var(--ease-enter);
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(560px, 92vw);
+  max-width: 100vw;
+  background: var(--bg-elevated);
+  border-left: 1px solid var(--line-strong);
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  z-index: 1001;
+  animation: slideIn var(--motion-medium) var(--ease-enter);
+  outline: none;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-lg);
+  border-bottom: 1px solid var(--line);
+}
+
+.headerText {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.subtitle {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  color: var(--ink-subtle);
+}
+
+/* 视觉由共享 Button（secondary·lg）承担；这里只留布局钩子。 */
+.close {
+  margin-left: auto;
+}
+
+.tierPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  padding: var(--sp-md) var(--sp-lg);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.tierTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-md);
+}
+
+.tierLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+}
+
+.tierCopy,
+.fallbackNote {
+  margin: 0;
+  font-size: var(--text-2sm);
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--sp-lg);
+  background:
+    linear-gradient(var(--bg-elevated), var(--bg-elevated)) padding-box,
+    linear-gradient(180deg, color-mix(in srgb, var(--line) 52%, transparent), transparent 96px) border-box;
+}
+
+.askRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  padding: var(--sp-md) var(--sp-lg);
+  border-top: 1px solid var(--line);
+  background: var(--bg-elevated);
+}
+
+.inputLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+}
+
+.input {
+  width: 100%;
+  padding: 9px 10px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  resize: vertical;
+  min-height: 64px;
+  max-height: 32vh;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.askActions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.askHint {
+  margin-left: auto;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--ink-subtle);
+}
+
+/* 行内等待样式（文字 + 脉冲点）走全局 .inline-wait / .inline-wait-dots；
+ * 这里只补该场景的最小高度。 */
+.loading {
+  min-height: 72px;
+}
+
+/* 语气着色走全局 tone-* 词汇表（globals.css）。 */
+.fallbackNote {
+  padding: var(--sp-sm) var(--sp-md);
+  border: 1px solid var(--tone-border, var(--line));
+  border-radius: var(--radius-sm);
+  background: var(--tone-surface, var(--bg-elevated));
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@media (max-width: 520px) {
+  .drawer {
+    width: 100vw;
+    border-left: 0;
+  }
+
+  .header,
+  .tierTop,
+  .askActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .close,
+  .askBtn {
+    width: 100%;
+  }
+
+  .askHint {
+    margin-left: 0;
+  }
+}

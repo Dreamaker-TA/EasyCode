@@ -1,0 +1,238 @@
+.wrap {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.36fr) minmax(0, 1fr);
+  gap: var(--sp-lg);
+  align-items: start;
+  min-width: 0;
+  padding-top: var(--sp-lg);
+  border-top: 1px solid var(--line);
+}
+
+.summary {
+  position: sticky;
+  top: var(--sp-md);
+  padding: var(--sp-lg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  min-width: 0;
+}
+
+.summaryTitle,
+.summaryBody {
+  margin: 0;
+}
+
+.summaryTitle {
+  margin-top: 6px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.summaryBody {
+  margin-top: 6px;
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  min-width: 0;
+}
+
+.detail {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  overflow: clip;
+}
+
+.detail summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sp-md);
+  cursor: pointer;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  list-style: none;
+}
+
+.detail summary::-webkit-details-marker {
+  display: none;
+}
+
+.detail summary::after {
+  content: "+";
+  margin-left: auto;
+  color: var(--ink-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+}
+
+.detail[open] summary {
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent) 3%, var(--bg-elevated));
+}
+
+.detail[open] summary::after {
+  content: "-";
+}
+
+.detail summary:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  outline-offset: -2px;
+}
+
+.dimensionList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-sm);
+  padding: var(--sp-md);
+}
+
+.dimensionCard {
+  padding: var(--sp-md);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  min-width: 0;
+}
+
+.dimensionHead {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+}
+
+.dimensionHead h2,
+.textBlock h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-2sm);
+  font-weight: 700;
+}
+
+.dimensionHead span:last-child {
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.dimensionSummary,
+.dimensionDetail,
+.textBlock p {
+  margin: 0;
+  color: var(--ink-muted);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.dimensionSummary {
+  margin-top: var(--sp-sm);
+  color: var(--ink);
+}
+
+.dimensionDetail {
+  margin-top: var(--sp-xs);
+}
+
+/* 语气着色走全局 tone-* 词汇表（globals.css）。 */
+.toneDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tone-mark, var(--ink-subtle));
+}
+
+.evidenceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-sm);
+  padding: var(--sp-md) var(--sp-md) 0;
+}
+
+.evidenceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+  min-width: 0;
+  padding: var(--sp-md);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+}
+
+.evidenceBlock span {
+  color: var(--ink-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.evidenceBlock strong {
+  color: var(--tone-fg, var(--ink));
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.textBlock {
+  padding: var(--sp-md);
+}
+
+.textBlock + .textBlock,
+.evidenceGrid + .textBlock {
+  padding-top: var(--sp-sm);
+}
+
+.textBlock p {
+  margin-top: 6px;
+  color: var(--ink);
+}
+
+.list,
+.monoList {
+  margin: 8px 0 0;
+  padding-left: 1.2em;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.monoList {
+  color: var(--danger);
+  font-family: var(--font-mono);
+  font-size: var(--text-2sm);
+}
+
+@media (max-width: 820px) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .summary {
+    position: static;
+  }
+}
+
+@media (max-width: 520px) {
+  .dimensionList,
+  .evidenceGrid {
+    grid-template-columns: 1fr;
+  }
+}

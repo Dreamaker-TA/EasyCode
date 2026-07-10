@@ -1,0 +1,44 @@
+## 题面
+
+{{ problem.statement_md }}
+
+## 学生当前编辑器内容
+
+```{{ language }}
+{{ current_code }}
+```
+
+{% if conversation %}
+## 最近对话（仅本提交内，最多 8 条）
+
+{% for m in conversation -%}
+{{ "学生" if m.role == "student" else "助教" }}：{{ m.content }}
+
+{% endfor -%}
+{% endif %}
+
+## 最近编写过程（首段完整代码，后续为相对上一段的 diff）
+
+{% for s in recent -%}
+{% if s.kind == "full" %}
+### t={{ s.t }}s · 首帧代码
+
+```{{ language }}
+{{ s.code }}
+```
+{% elif s.kind == "diff" %}
+### t={{ s.t }}s · 相对上一段的改动
+
+```diff
+{{ s.diff_text }}
+```
+{% endif %}
+{% endfor %}
+
+## 提示阶梯状态
+
+学生此前已展开到**第 {{ current_tier }} 层**（0 = 还没求助过）。请按 system 的单调递进规则，本次**只推进到第 {{ current_tier + 1 }} 层**。
+
+## 学生的具体疑问
+
+{{ user_question or "（没有具体问题，请综合判断当前卡点。）" }}

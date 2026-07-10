@@ -1,0 +1,57 @@
+# 构建上下文瘦身 + 防止把密钥/本地产物烘焙进镜像。
+# 注意：仓库根 .env 仍会被 `docker compose` 在宿主侧读取做 ${VAR} 插值，
+#       .dockerignore 只影响 COPY 进镜像的内容（故排除 .env 是对的——不 bake 密钥）。
+
+# VCS / secrets
+.git/
+.gitignore
+.env
+.env.local
+.env.*
+
+# Python caches / venv
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+.ruff_cache/
+backend/.venv/
+
+# Problem banks are mounted at runtime; only examples/problem-bank is baked in.
+/Code/
+/archive/
+/site/
+/docs/
+/DESIGN.md
+/PRODUCT.md
+
+# 运行期数据（DB 与生成的 problems.json 走数据卷）
+backend/data/*.db
+backend/data/*.sqlite
+backend/data/*.sqlite3
+backend/data/*.db-journal
+backend/data/*.db-shm
+backend/data/*.db-wal
+backend/data/problems.json
+
+# 前端构建产物（镜像内重建）
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.tsbuildinfo
+.pnpm-store/
+
+# 文档 / 媒体（运行时不需要）
+_screenshots/
+frontend/_screenshots/
+
+# 编辑器 / OS / 工具
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.log
+.claude/
+.codex/
+.cursor/
+.continue/
+.windsurf/
