@@ -15,6 +15,7 @@
 [![SQLite](https://img.shields.io/badge/SQLite-local-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 
 **[快速开始](#快速开始)** ·
+**[训练闭环](#一道题走完完整训练闭环)** ·
 **[自建题库](#自建题库)** ·
 **[配置](#配置)** ·
 **[架构](#架构)** ·
@@ -22,18 +23,22 @@
 
 </div>
 
+![EasyCode 首页](assets/screenshots/easycode-home.jpg)
+
+<p align="center"><sub>截图来自个人导入题库，仅供演示使用。</sub></p>
+
 ---
 
 ## EasyCode 是什么
 
-EasyCode 是一个跑在你电脑上的算法训练桌。它适合已经看过讲解、现在需要反复动手练习并形成复习节奏的人。
+EasyCode 是一个运行在本机的算法训练工具，围绕作答、Python 测试、AI 评测、过程回放和间隔复习，组织完整的训练流程。
 
-普通在线判题只给红灯或绿灯。EasyCode 关心的是你如何得到这个结果：
+每次练习都会形成可继续使用的训练记录：
 
 - 内置代码编辑器、计时器、本地草稿，以及每 30 秒一次的代码快照
 - 通过与题目同名的 `.tests.json` 测试文件提供 Python 运行结果
-- AI 从五个方面评测：能否运行、代码质量、复杂度、优化建议和解题过程
-- 苏格拉底式助教：给提示，但不直接暴露参考答案
+- AI 从正确性、复杂度、代码质量、解题过程和改进建议五个维度进行评测
+- 苏格拉底式助教根据当前思路提供渐进提示
 - A/B/C/D 掌握度评级，据此安排后续复习时间
 - 历史回放、Markdown 导出、本地分享卡片生成
 
@@ -113,6 +118,30 @@ make dev
 ```bash
 BACKEND_PORT=8010 FRONTEND_PORT=5174 make dev
 ```
+
+---
+
+## 一道题，走完完整训练闭环
+
+以下画面来自 EasyCode 本地完成 LeetCode 704「二分查找」的一次真实训练：2/2 样例通过，AI 评级为 A，系统记录了 2 个代码过程节点，并生成了后续复习计划。
+
+### 1. 本地作答，提交前运行 Python 测试
+
+在内置编辑器中写代码时，EasyCode 会同步保存计时、本地草稿和定期代码快照。提交之前，可以直接运行与题目配套的 Python 测试，并在当前工作台查看结果。
+
+![EasyCode 二分查找作答工作台与两个通过的测试样例](assets/screenshots/easycode-workspace.jpg)
+
+### 2. 把一次提交变成有证据的复盘
+
+EasyCode 会结合测试结果、复杂度、代码质量和作答过程，生成五个维度的评测结果。最终的 A/B/C/D 掌握度评级会进一步转化为明确的复习间隔。
+
+![EasyCode AI 评测、五维分析与下一次复习时间](assets/screenshots/easycode-review.jpg)
+
+### 3. 回放关键代码的形成过程
+
+沿着记录的代码快照逐步查看关键代码的变化，在完整上下文中检查最终实现、比较不同尝试，并将本次训练导出为 Markdown。
+
+![EasyCode 历史记录中的代码快照与过程回放时间线](assets/screenshots/easycode-replay.jpg)
 
 ---
 

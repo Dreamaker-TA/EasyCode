@@ -15,6 +15,7 @@ Write code locally, run Python tests, get feedback from an AI model, replay your
 [![SQLite](https://img.shields.io/badge/SQLite-local-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 
 **[Quick Start](#quick-start)** ·
+**[Product Tour](#one-problem-a-complete-training-loop)** ·
 **[Problem Bank](#build-your-own-problem-bank)** ·
 **[Configuration](#configuration)** ·
 **[Architecture](#architecture)** ·
@@ -22,18 +23,22 @@ Write code locally, run Python tests, get feedback from an AI model, replay your
 
 </div>
 
+![EasyCode dashboard](assets/screenshots/easycode-home.jpg)
+
+<p align="center"><sub>Screenshot uses a personally imported problem bank for demonstration.</sub></p>
+
 ---
 
 ## What EasyCode Is
 
-EasyCode is a local, pluggable practice desk for people who already know the lesson and now need repeated, high-signal practice.
+EasyCode is a local algorithm-training workspace that connects coding, Python tests, AI review, process replay, and spaced repetition in one continuous workflow.
 
-Traditional online judges give you a red or green light. EasyCode records how you got there:
+Each practice session becomes a reusable training record:
 
 - a built-in code editor, timer, local drafts, and 30-second code snapshots
 - Python test results from a matching `.tests.json` file
-- AI feedback across five areas: whether the code runs, code quality, complexity, improvements, and process
-- a Socratic tutor that gives guided help without exposing the reference answer
+- AI review across correctness, complexity, code quality, process, and improvements
+- Socratic guidance that responds to the learner's current approach
 - A/B/C/D mastery ratings that determine the next review date
 - history replay, Markdown export, and local share-card rendering
 
@@ -115,6 +120,30 @@ ports:
 ```bash
 BACKEND_PORT=8010 FRONTEND_PORT=5174 make dev
 ```
+
+---
+
+## One Problem, a Complete Training Loop
+
+These screenshots follow a real local training session for LeetCode 704, Binary Search. Both public tests passed, the AI review rated the submission A, EasyCode captured two process snapshots, and the session produced a follow-up review schedule.
+
+### 1. Solve locally and verify with Python tests
+
+Write in the built-in editor while EasyCode keeps the timer, local draft, and periodic code snapshots. Run the matching Python tests before submission and view the results in the same workspace.
+
+![EasyCode problem workspace with a binary-search solution and two passing tests](assets/screenshots/easycode-workspace.jpg)
+
+### 2. Turn a submission into evidence-backed feedback
+
+EasyCode combines test evidence, complexity analysis, code quality, and process history into a five-part review. The resulting A/B/C/D mastery rating sets a concrete review interval.
+
+![EasyCode AI review with an A rating, five review dimensions, and the next review date](assets/screenshots/easycode-review.jpg)
+
+### 3. Replay how the solution evolved
+
+Step through recorded snapshots to see when key lines appeared, inspect the finished code in context, compare attempts, and export the session as Markdown.
+
+![EasyCode history replay with recorded code snapshots and a replay timeline](assets/screenshots/easycode-replay.jpg)
 
 ---
 
