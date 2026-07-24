@@ -4,7 +4,7 @@
 # 镜像内 /app = 仓库根，保持原嵌套使 settings.PROJECT_ROOT 解析为 /app。
 
 # ============ stage 1: 前端构建 ============
-FROM node:20-slim AS frontend
+FROM node:26-slim AS frontend
 WORKDIR /build
 # 使用与本地和 CI 一致的 pnpm 主版本。
 RUN npm install -g pnpm@10.34.4
@@ -22,7 +22,7 @@ RUN pnpm build
 # → /build/dist（含 index.html、assets/、自托管 pyodide/*.wasm|*.mjs）
 
 # ============ stage 2: 后端 + 静态服务 ============
-FROM python:3.12-slim AS backend
+FROM python:3.14-slim AS backend
 
 # uv 官方镜像拷二进制（最快的安装方式）
 COPY --from=ghcr.io/astral-sh/uv:0.7.10 /uv /uvx /bin/
