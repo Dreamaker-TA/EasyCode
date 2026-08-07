@@ -4,7 +4,7 @@
 # 镜像内 /app = 仓库根，保持原嵌套使 settings.PROJECT_ROOT 解析为 /app。
 
 # ============ stage 1: 前端构建 ============
-FROM node:20-slim AS frontend
+FROM node:25-slim AS frontend
 WORKDIR /build
 # 使用与本地和 CI 一致的 pnpm 主版本。
 RUN npm install -g pnpm@10.34.4
