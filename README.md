@@ -1,45 +1,83 @@
 <div align="center">
 
-# EasyCode
+<table>
+<tr>
+<td align="center" bgcolor="#F7F2E9" width="760">
+<br>
+<img src="assets/brand/easycode-icon.png" alt="EasyCode icon" width="124">
+<br><br>
+<img src="assets/brand/easycode-wordmark.png" alt="EasyCode" width="320">
+<br><br>
+<h1>Practice. Prove. Remember.</h1>
+<p><strong>Local-first algorithm training for people who want more than an accepted answer.</strong></p>
+<p>Write code locally, run Python tests, get context-aware AI feedback, replay your process, and return when it matters.</p>
+<br>
 
-**Turn algorithm practice into supervised training.**
+<p>
+<a href="https://github.com/Dreamaker-TA/EasyCode/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dreamaker-TA/EasyCode/actions/workflows/ci.yml/badge.svg"></a>
+<a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+<a href="https://www.python.org/"><img alt="Python" src="https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white"></a>
+<a href="https://nodejs.org/"><img alt="Node" src="https://img.shields.io/badge/Node-20+-339933?logo=node.js&logoColor=white"></a>
+<a href="https://fastapi.tiangolo.com/"><img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white"></a>
+<a href="https://react.dev/"><img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black"></a>
+<a href="https://www.sqlite.org/"><img alt="SQLite" src="https://img.shields.io/badge/SQLite-local-003B57?logo=sqlite&logoColor=white"></a>
+</p>
+<br>
+</td>
+</tr>
+</table>
 
-Write code locally, run Python tests, get feedback from an AI model, replay your process, ask for guided help, and get a clear plan for when to revisit each problem.
+<p><sub>WRITE → TEST → REVIEW → REPLAY → REVISIT</sub></p>
 
-[![CI](https://github.com/Dreamaker-TA/EasyCode/actions/workflows/ci.yml/badge.svg)](https://github.com/Dreamaker-TA/EasyCode/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Node](https://img.shields.io/badge/Node-20+-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![SQLite](https://img.shields.io/badge/SQLite-local-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
-
-**[Quick Start](#quick-start)** ·
-**[Product Tour](#one-problem-a-complete-training-loop)** ·
-**[Problem Bank](#build-your-own-problem-bank)** ·
-**[Configuration](#configuration)** ·
-**[Architecture](#architecture)** ·
-**[中文](README.zh.md)**
+<p>
+<strong><a href="#quick-start">Quick Start</a></strong> ·
+<strong><a href="#the-loop-at-a-glance">The Loop</a></strong> ·
+<strong><a href="#one-problem-a-complete-training-loop">Product Tour</a></strong> ·
+<strong><a href="#build-your-own-problem-bank">Problem Bank</a></strong> ·
+<strong><a href="#configuration">Configuration</a></strong> ·
+<strong><a href="README.zh.md">中文</a></strong>
+</p>
 
 </div>
 
-![EasyCode dashboard](assets/screenshots/easycode-home.jpg)
+<p align="center">
+  <img src="assets/screenshots/easycode-home.jpg" alt="EasyCode dashboard showing a local algorithm training workspace">
+</p>
 
-<p align="center"><sub>Screenshot uses a personally imported problem bank for demonstration.</sub></p>
+<p align="center"><sub>A local workspace for turning one coding attempt into evidence you can use again.</sub></p>
 
 ---
 
+## The loop at a glance
+
+<table>
+<tr>
+<td align="center" width="25%"><strong>01 · WRITE</strong><br><sub>Code in a focused local workspace.</sub></td>
+<td align="center" width="25%"><strong>02 · TEST</strong><br><sub>Run Python tests before you submit.</sub></td>
+<td align="center" width="25%"><strong>03 · REVIEW</strong><br><sub>See feedback grounded in code and process.</sub></td>
+<td align="center" width="25%"><strong>04 · REVISIT</strong><br><sub>Return with a concrete review date.</sub></td>
+</tr>
+</table>
+
 ## What EasyCode Is
 
-EasyCode is a local algorithm-training workspace that connects coding, Python tests, AI review, process replay, and spaced repetition in one continuous workflow.
+EasyCode is a local algorithm-training workspace that connects coding, Python tests, AI review, process replay, and spaced repetition in one continuous workflow. It is designed to help you understand how you solved a problem—not just whether the final answer passed.
+
+<table>
+<tr>
+<td valign="top" width="50%"><strong>Stay in the flow</strong><br><sub>A built-in editor, timer, local drafts, and 30-second code snapshots keep the attempt together.</sub></td>
+<td valign="top" width="50%"><strong>Leave with evidence</strong><br><sub>Python tests, complexity checks, code quality, and process history give the review something real to work from.</sub></td>
+</tr>
+<tr>
+<td valign="top" width="50%"><strong>Ask for the next hint</strong><br><sub>Socratic guidance responds to your current approach instead of jumping straight to the solution.</sub></td>
+<td valign="top" width="50%"><strong>Know when to return</strong><br><sub>A/B/C/D mastery ratings turn one session into a clear next review date.</sub></td>
+</tr>
+</table>
 
 Each practice session becomes a reusable training record:
 
-- a built-in code editor, timer, local drafts, and 30-second code snapshots
-- Python test results from a matching `.tests.json` file
+- a matching `.tests.json` file with Python test results
 - AI review across correctness, complexity, code quality, process, and improvements
-- Socratic guidance that responds to the learner's current approach
-- A/B/C/D mastery ratings that determine the next review date
 - history replay, Markdown export, and local share-card rendering
 
 ---
@@ -183,7 +221,7 @@ PROBLEM_BANK_HOST_PATH=/absolute/path/to/my-bank docker compose up --build
 
 This repository's project skill is the recommended way to create a problem-bank
 entry. It turns an exercise brief into a validated Markdown problem, test file,
-and grading rubric.
+and grading-criteria file.
 
 Start a new agent session from the repository root, then use either:
 
@@ -210,6 +248,9 @@ EASYCODE_PROBLEM_BANK_ROOT=/absolute/path/to/my-bank make ingest
 The helper validates the reference Python solution against sample outputs and
 derives hidden-case `expected_stdout` from that same program.
 
+<details>
+<summary>Copy the full prompt</summary>
+
 ```text
 Create an EasyCode JSON problem description for an original programming exercise.
 
@@ -232,11 +273,13 @@ Requirements:
 - Ensure the reference program really produces every sample "expected" output.
 ```
 
+</details>
+
 If `.env` already contains a working AI model configuration, `make problem-generate BANK_ROOT=/absolute/path/to/my-bank` is an interactive shortcut for this same AI-assisted workflow.
 
 ### Manual: Write the Files Yourself
 
-Use this format only when you prefer to maintain the Markdown and sidecar files yourself.
+Use this format only when you prefer to maintain the Markdown and supporting files yourself.
 
 Each problem is a Markdown file under `Code/**/*.md`. A matching `.rubric.md` file holds optional grading criteria; it is not a standalone problem.
 

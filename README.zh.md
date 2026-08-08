@@ -1,45 +1,83 @@
 <div align="center">
 
-# EasyCode
+<table>
+<tr>
+<td align="center" bgcolor="#F7F2E9" width="760">
+<br>
+<img src="assets/brand/easycode-icon.png" alt="EasyCode 图标" width="124">
+<br><br>
+<img src="assets/brand/easycode-wordmark.png" alt="EasyCode" width="320">
+<br><br>
+<h1>写下。验证。记住。</h1>
+<p><strong>给不满足于“通过”的人，一套本地优先的算法训练工作台。</strong></p>
+<p>本地写代码，运行 Python 测试，获得结合过程的 AI 评测，回放思路，并在合适的时间回来复习。</p>
+<br>
 
-**把刷题变成被指导的练习。**
+<p>
+<a href="https://github.com/Dreamaker-TA/EasyCode/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dreamaker-TA/EasyCode/actions/workflows/ci.yml/badge.svg"></a>
+<a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+<a href="https://www.python.org/"><img alt="Python" src="https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white"></a>
+<a href="https://nodejs.org/"><img alt="Node" src="https://img.shields.io/badge/Node-20+-339933?logo=node.js&logoColor=white"></a>
+<a href="https://fastapi.tiangolo.com/"><img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white"></a>
+<a href="https://react.dev/"><img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black"></a>
+<a href="https://www.sqlite.org/"><img alt="SQLite" src="https://img.shields.io/badge/SQLite-local-003B57?logo=sqlite&logoColor=white"></a>
+</p>
+<br>
+</td>
+</tr>
+</table>
 
-本地写题、本地运行 Python 测试，让 AI 复盘你的代码和解题过程；系统再根据掌握情况安排下一次复习。
+<p><sub>写题 → 测试 → 评测 → 回放 → 复习</sub></p>
 
-[![CI](https://github.com/Dreamaker-TA/EasyCode/actions/workflows/ci.yml/badge.svg)](https://github.com/Dreamaker-TA/EasyCode/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Node](https://img.shields.io/badge/Node-20+-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![SQLite](https://img.shields.io/badge/SQLite-local-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
-
-**[快速开始](#快速开始)** ·
-**[训练闭环](#一道题走完完整训练闭环)** ·
-**[自建题库](#自建题库)** ·
-**[配置](#配置)** ·
-**[架构](#架构)** ·
-**[English](README.md)**
+<p>
+<strong><a href="#快速开始">快速开始</a></strong> ·
+<strong><a href="#训练闭环一览">训练闭环</a></strong> ·
+<strong><a href="#一道题走完完整训练闭环">产品演示</a></strong> ·
+<strong><a href="#自建题库">自建题库</a></strong> ·
+<strong><a href="#配置">配置</a></strong> ·
+<strong><a href="README.md">English</a></strong>
+</p>
 
 </div>
 
-![EasyCode 首页](assets/screenshots/easycode-home.jpg)
+<p align="center">
+  <img src="assets/screenshots/easycode-home.jpg" alt="EasyCode 首页，展示本地算法训练工作台">
+</p>
 
-<p align="center"><sub>截图来自个人导入题库，仅供演示使用。</sub></p>
+<p align="center"><sub>把一次作答，变成之后还可以继续使用的训练证据。</sub></p>
 
 ---
 
+## 训练闭环一览
+
+<table>
+<tr>
+<td align="center" width="25%"><strong>01 · 写题</strong><br><sub>在专注的本地工作台中完成作答。</sub></td>
+<td align="center" width="25%"><strong>02 · 测试</strong><br><sub>提交前先运行 Python 测试。</sub></td>
+<td align="center" width="25%"><strong>03 · 评测</strong><br><sub>让反馈同时参考代码和解题过程。</sub></td>
+<td align="center" width="25%"><strong>04 · 复习</strong><br><sub>带着明确的复习时间再次回来。</sub></td>
+</tr>
+</table>
+
 ## EasyCode 是什么
 
-EasyCode 是一个运行在本机的算法训练工具，围绕作答、Python 测试、AI 评测、过程回放和间隔复习，组织完整的训练流程。
+EasyCode 是一个运行在本机的算法训练工具，围绕作答、Python 测试、AI 评测、过程回放和间隔复习，组织完整的训练流程。它关注的不只是答案是否通过，还关注你是怎样走到答案的。
+
+<table>
+<tr>
+<td valign="top" width="50%"><strong>保持在思路里</strong><br><sub>编辑器、计时器、本地草稿和每 30 秒一次的代码快照，让一次作答保持完整。</sub></td>
+<td valign="top" width="50%"><strong>留下真实证据</strong><br><sub>Python 测试、复杂度、代码质量和解题过程，让评测有可核对的依据。</sub></td>
+</tr>
+<tr>
+<td valign="top" width="50%"><strong>只得到下一步提示</strong><br><sub>苏格拉底式助教根据你当前的思路推进，不会直接跳到答案。</sub></td>
+<td valign="top" width="50%"><strong>知道什么时候回来</strong><br><sub>A/B/C/D 掌握度评级会转化为明确的下一次复习时间。</sub></td>
+</tr>
+</table>
 
 每次练习都会形成可继续使用的训练记录：
 
-- 内置代码编辑器、计时器、本地草稿，以及每 30 秒一次的代码快照
 - 通过与题目同名的 `.tests.json` 测试文件提供 Python 运行结果
 - AI 从正确性、复杂度、代码质量、解题过程和改进建议五个维度进行评测
-- 苏格拉底式助教根据当前思路提供渐进提示
-- A/B/C/D 掌握度评级，据此安排后续复习时间
 - 历史回放、Markdown 导出、本地分享卡片生成
 
 ---
@@ -203,6 +241,9 @@ EASYCODE_PROBLEM_BANK_ROOT=/absolute/path/to/my-bank make ingest
 
 工具会用参考 Python 程序校验样例输出，并从同一程序生成隐藏用例的 `expected_stdout`。
 
+<details>
+<summary>复制完整提示词</summary>
+
 ```text
 请为 EasyCode 创建一道原创编程练习的 JSON 格式题目说明。
 
@@ -225,11 +266,13 @@ EASYCODE_PROBLEM_BANK_ROOT=/absolute/path/to/my-bank make ingest
 - 确保参考程序确实能产出每个样例的 "expected" 输出。
 ```
 
+</details>
+
 如果 `.env` 已配置可用模型，也可以运行 `make problem-generate BANK_ROOT=/absolute/path/to/my-bank`；它只是同一 AI 辅助流程的交互式快捷入口。
 
 ### 手动：自己维护题目文件
 
-仅当你想亲自维护 Markdown 和边车文件时，使用下面的格式。
+仅当你想亲自维护 Markdown 和配套文件时，使用下面的格式。
 
 每道题都是 `Code/**/*.md` 下的一个 Markdown 文件。以 `.rubric.md` 结尾的同名评分要求文件不会被当作题目。
 
@@ -511,6 +554,6 @@ LLM_API_KEY=sk-xxx
 
 ---
 
-## License
+## 许可证
 
 [MIT](LICENSE)
