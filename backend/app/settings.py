@@ -15,7 +15,9 @@ from pydantic_settings import (
     SettingsConfigDict,
 )
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(
+    os.environ.get("EASYCODE_RESOURCE_ROOT") or Path(__file__).resolve().parents[2]
+).resolve()
 
 DEFAULT_DEV_CORS_ORIGINS = (
     "http://localhost:5173",

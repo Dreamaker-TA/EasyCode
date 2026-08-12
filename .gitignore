@@ -41,6 +41,11 @@ frontend/*.tsbuildinfo
 frontend/coverage/
 .pnpm-store/
 /frontend/.impeccable/
+/desktop/node_modules/
+/desktop/backend-dist/
+/desktop/.pyinstaller-build/
+/desktop/build/
+/desktop/release/
 
 # Editor / OS
 .DS_Store

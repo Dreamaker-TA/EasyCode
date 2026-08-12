@@ -14,9 +14,9 @@ from sqlalchemy.orm import Session
 from app.db.session import DB_PATH
 from app.models import Problem
 from app.settings import PROJECT_ROOT, settings
+from app.version import VERSION
 from app.services import submission_service, testcase_loader
 
-VERSION = "0.0.1"
 REQUIRED_PROBLEM_FIELDS = {
     "title",
     "category",

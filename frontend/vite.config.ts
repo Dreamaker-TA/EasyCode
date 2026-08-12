@@ -18,7 +18,7 @@ const PYODIDE_FILES = [
 ];
 
 function pyodideSelfHost(): Plugin {
-  const dir = path.resolve(__dirname, "node_modules/pyodide");
+  const dir = path.resolve(import.meta.dirname, "node_modules/pyodide");
   const mimeOf = (name: string) =>
     name.endsWith(".wasm")
       ? "application/wasm" // instantiateStreaming 要求 application/wasm
@@ -56,11 +56,11 @@ function pyodideSelfHost(): Plugin {
 }
 
 export default defineConfig({
-  envDir: path.resolve(__dirname, ".."),
+  envDir: path.resolve(import.meta.dirname, ".."),
   plugins: [react(), pyodideSelfHost()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
   server: {

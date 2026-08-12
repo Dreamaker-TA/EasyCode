@@ -29,6 +29,7 @@ from app.api import training as training_api
 from app.api import user_settings as user_settings_api
 from app.services import submission_service, testcase_loader
 from app.settings import PROJECT_ROOT, settings
+from app.version import VERSION
 
 # Pyodide 自托管资源 MIME：.wasm 在 Python 3.11 的 mimetypes 默认缺失，而 pyodide 的
 # instantiateStreaming 强制要 application/wasm；/pyodide/*.mjs 运行时被 import() 需 JS MIME。
@@ -49,7 +50,7 @@ async def lifespan(_: FastAPI):
     yield
 
 
-app = FastAPI(title="EasyCode Backend", version="0.0.1", lifespan=lifespan)
+app = FastAPI(title="EasyCode Backend", version=VERSION, lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -110,7 +111,7 @@ async def _unhandled_exception_handler(_: Request, exc: Exception) -> JSONRespon
 
 @app.get("/healthz")
 def healthz() -> dict:
-    return {"status": "ok", "version": "0.0.1"}
+    return {"status": "ok", "version": VERSION}
 
 
 # === 业务路由 ===

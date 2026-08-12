@@ -84,7 +84,25 @@ Each practice session becomes a reusable training record:
 
 ## Quick Start
 
-### Option A: Docker
+### Option A: Desktop App (Windows / macOS)
+
+Download a desktop preview from [GitHub Releases](https://github.com/Dreamaker-TA/EasyCode/releases):
+
+- macOS Apple Silicon (`arm64`): DMG or ZIP
+- macOS Intel (`x64`): DMG or ZIP
+- Windows 10/11 (`x64`): installer (`.exe`) or portable ZIP
+
+The desktop app keeps its database, model settings, and access key in your OS
+user-data directory. It does not require Docker, Python, Node.js, or a network
+connection for local code execution. Configure an AI model in **Settings** if
+you want AI review and tutoring.
+
+> **Preview signing notice:** the first desktop packages are unsigned. macOS
+> Gatekeeper and Windows SmartScreen may show a warning. Verify the downloaded
+> file against `SHA256SUMS.txt` on the release page. Signed and notarized builds
+> are the remaining requirement before the desktop release is called stable.
+
+### Option B: Docker
 
 Use this if you want the simplest path.
 
@@ -121,7 +139,7 @@ Docker notes:
 | Use your own problem bank | `PROBLEM_BANK_HOST_PATH=/absolute/path/to/my-bank docker compose up --build` |
 | Access app | `http://localhost:8000` |
 
-### Option B: Source Development
+### Option C: Source Development
 
 Use this if you want hot reload or plan to modify the app.
 
@@ -505,6 +523,7 @@ frontend/
     styles/       global styles and design variables
 
 examples/problem-bank/   one tiny sample bank
+desktop/                 native launcher, backend bundling, and installer configuration
 scripts/                 bootstrap, ingest, generation, and release checks
 ```
 

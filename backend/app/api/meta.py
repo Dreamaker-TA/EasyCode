@@ -8,6 +8,7 @@ from __future__ import annotations
 from fastapi import APIRouter
 
 from app.settings import settings
+from app.version import VERSION
 
 router = APIRouter(prefix="/meta", tags=["meta"])
 
@@ -16,5 +17,5 @@ router = APIRouter(prefix="/meta", tags=["meta"])
 def get_meta() -> dict:
     return {
         "executor": settings.EXECUTOR,
-        "version": "0.0.1",
+        "version": VERSION,
     }

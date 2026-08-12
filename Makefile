@@ -3,7 +3,7 @@ BACKEND_HOST ?= 127.0.0.1
 BACKEND_PORT ?= 8000
 VITE_API_BASE ?= http://$(BACKEND_HOST):$(BACKEND_PORT)/api
 
-.PHONY: install dev backend frontend ingest migrate seed problem-generate problem-entry-check problem-entry clean ci runtime-check public-audit dependency-audit compose-check release-check bundle-check help docker-up docker-down docker-clean
+.PHONY: install dev backend frontend ingest migrate seed problem-generate problem-entry-check problem-entry clean ci runtime-check public-audit dependency-audit compose-check release-check bundle-check desktop-check desktop-backend desktop-dist help docker-up docker-down docker-clean
 
 help:
 	@echo "Targets:"
@@ -25,6 +25,9 @@ help:
 	@echo "  compose-check 校验 Docker Compose 配置（无需启动 daemon）"
 	@echo "  release-check  开源前完整检查：public-audit + compose-check + ci + 再次审计"
 	@echo "  bundle-check  检查前端 production bundle 预算（需先 build）"
+	@echo "  desktop-check 检查桌面启动器语法与 release 版本一致性"
+	@echo "  desktop-backend 构建当前系统的桌面后端（需先 build 前端）"
+	@echo "  desktop-dist  构建当前系统的桌面安装包"
 	@echo "  docker-up    🐳 一键起（docker compose up --build；PROBLEM_BANK_HOST_PATH 可挂外部题库）"
 	@echo "  docker-down  停容器（保留数据卷）"
 	@echo "  docker-clean 停容器并删数据卷（清库）"
@@ -94,6 +97,7 @@ public-audit:
 
 dependency-audit:
 	cd frontend && pnpm audit --audit-level low
+	cd desktop && pnpm audit --audit-level low
 	cd backend && uvx pip-audit --path "$$(uv run python -c 'import site; print(site.getsitepackages()[0])')" --progress-spinner off
 
 compose-check:
@@ -108,6 +112,19 @@ release-check:
 
 bundle-check:
 	node scripts/check_frontend_bundle.mjs
+
+desktop-check:
+	python3 scripts/check_release_versions.py
+	python3 -m py_compile desktop/backend_entry.py scripts/build_desktop_backend.py scripts/check_release_versions.py
+	cd desktop && node --check main.cjs
+
+desktop-backend:
+	cd frontend && VITE_API_BASE=/api pnpm build
+	uv run --project backend --group desktop python scripts/build_desktop_backend.py
+
+desktop-dist: desktop-check desktop-backend
+	cd desktop && pnpm install --frozen-lockfile
+	cd desktop && if [ "$$(uname -s)" = "Darwin" ]; then pnpm dist:mac; else pnpm dist:win; fi
 
 docker-up:
 	docker compose up --build

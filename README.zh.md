@@ -84,7 +84,24 @@ EasyCode 是一个运行在本机的算法训练工具，围绕作答、Python �
 
 ## 快速开始
 
-### 方案 A：Docker
+### 方案 A：桌面版（Windows / macOS）
+
+从 [GitHub Releases](https://github.com/Dreamaker-TA/EasyCode/releases) 下载桌面预览版：
+
+- Apple 芯片 Mac（`arm64`）：DMG 或 ZIP
+- Intel Mac（`x64`）：DMG 或 ZIP
+- Windows 10/11（`x64`）：安装程序（`.exe`）或免安装 ZIP
+
+桌面版会把数据库、模型设置和访问密钥保存在当前系统用户的数据目录，
+不要求预装 Docker、Python 或 Node.js；本地运行代码也不依赖网络。
+如需 AI 评测和助教，在应用内“设置”中配置模型即可。
+
+> **预览版签名说明：**首批桌面安装包尚未签名。macOS Gatekeeper 或
+> Windows SmartScreen 可能显示提醒。请用 Release 页面里的
+> `SHA256SUMS.txt` 核对下载文件。完成 macOS 签名/公证和 Windows 代码签名后，
+> 才适合将桌面版标记为稳定版。
+
+### 方案 B：Docker
 
 如果只想尽快跑起来，推荐使用 Docker（把运行环境打包好的一种启动方式）。
 
@@ -121,7 +138,7 @@ Docker 常用项：
 | 使用自己的题库 | `PROBLEM_BANK_HOST_PATH=/absolute/path/to/my-bank docker compose up --build` |
 | 访问应用 | `http://localhost:8000` |
 
-### 方案 B：源码开发
+### 方案 C：源码开发
 
 如果你要改代码或需要热更新，用源码方式。
 
@@ -498,6 +515,7 @@ frontend/
     styles/       全局样式和设计变量
 
 examples/problem-bank/   一道极小示例题库
+desktop/                 桌面启动器、后端打包与安装包配置
 scripts/                 初始化、题库摄取、题目生成与发布检查
 ```
 

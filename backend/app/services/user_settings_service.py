@@ -65,6 +65,11 @@ def _write_env(path: Path, updates: dict[str, str]) -> None:
             out.append(f"{key}={_escape_env_value(value)}")
 
     path.write_text("\n".join(out).rstrip() + "\n", encoding="utf-8")
+    try:
+        path.chmod(0o600)
+    except OSError:
+        # Windows applies access control through the user's profile directory.
+        pass
 
 
 def _apply_runtime(updates: dict[str, str]) -> None:

@@ -1,0 +1,70 @@
+{
+  "name": "easycode-desktop",
+  "version": "0.1.0",
+  "description": "EasyCode desktop application",
+  "main": "main.cjs",
+  "author": "Dreamaker-TA",
+  "license": "MIT",
+  "private": true,
+  "packageManager": "pnpm@10.34.4",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check main.cjs",
+    "dist:mac": "electron-builder --mac dmg zip",
+    "dist:win": "electron-builder --win nsis zip"
+  },
+  "devDependencies": {
+    "electron": "43.4.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "com.dreamakerta.easycode",
+    "productName": "EasyCode",
+    "asar": true,
+    "directories": {
+      "output": "release",
+      "buildResources": "../assets/brand"
+    },
+    "files": [
+      "main.cjs",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "backend-dist/easycode-backend",
+        "to": "backend",
+        "filter": ["**/*"]
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.education",
+      "icon": "easycode-icon.png",
+      "target": ["dmg", "zip"],
+      "artifactName": "EasyCode-${version}-macOS-${arch}.${ext}"
+    },
+    "dmg": {
+      "title": "EasyCode ${version}",
+      "backgroundColor": "#faf9f7",
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "contents": [
+        { "x": 150, "y": 190, "type": "file" },
+        { "x": 390, "y": 190, "type": "link", "path": "/Applications" }
+      ]
+    },
+    "win": {
+      "icon": "easycode-icon.png",
+      "target": ["nsis", "zip"],
+      "artifactName": "EasyCode-${version}-Windows-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "EasyCode"
+    }
+  }
+}

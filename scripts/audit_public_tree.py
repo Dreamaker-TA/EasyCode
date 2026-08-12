@@ -15,7 +15,9 @@ ALLOWED_MARKDOWN = {
     PurePosixPath("README.md"),
     PurePosixPath("README.zh.md"),
     PurePosixPath("PROBLEM_BANK_FORMAT.md"),
+    PurePosixPath("desktop/README.md"),
     PurePosixPath("examples/problem-bank/README.md"),
+    PurePosixPath("frontend/PRODUCT.md"),
     PurePosixPath("frontend/public/ASSETS.md"),
 }
 ALLOWED_MARKDOWN_PREFIXES = (

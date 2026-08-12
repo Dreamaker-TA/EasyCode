@@ -9,10 +9,10 @@
  */
 
 import { loader } from "@monaco-editor/react";
-import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
+import * as monaco from "monaco-editor/editor/editor.api.js";
 
-import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
-import "monaco-editor/esm/vs/basic-languages/python/python.contribution";
+import editorWorker from "monaco-editor/editor/editor.worker.js?worker";
+import "monaco-editor/languages/definitions/python/register.js";
 
 import { tokens } from "@/styles/tokens";
 
