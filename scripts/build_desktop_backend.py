@@ -28,6 +28,8 @@ def main() -> int:
     problems_json = build_dir / "problems.json"
     env = os.environ.copy()
     env["EASYCODE_PROBLEMS_JSON_PATH"] = str(problems_json)
+    env["PYTHONIOENCODING"] = "utf-8"
+    env["PYTHONUTF8"] = "1"
     _run([sys.executable, str(ROOT / "scripts" / "ingest_problems.py")], env=env)
 
     _run(
