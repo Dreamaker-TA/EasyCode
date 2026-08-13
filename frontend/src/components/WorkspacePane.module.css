@@ -33,6 +33,8 @@
   border-top: 1px solid var(--line);
   background: var(--bg-soft);
   min-height: 0;
+  transform-origin: bottom;
+  animation: console-in var(--motion-slow) var(--ease-enter) both;
 }
 .consoleHeader {
   flex-shrink: 0;
@@ -57,6 +59,25 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
+  animation: review-region-in var(--motion-slow) var(--ease-enter) both;
+}
+
+@keyframes console-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0);
+  }
+}
+
+@keyframes review-region-in {
+  from { opacity: 0; transform: translateX(8px); }
+  to { opacity: 1; transform: none; }
 }
 .reviewScroll {
   flex: 1;

@@ -57,11 +57,18 @@
   color: var(--ink);
   text-decoration: none;
   font-size: var(--text-base);
-  transition: background var(--motion-fast);
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 .item:hover {
   background: var(--bg-soft);
+  transform: translateX(3px);
   text-decoration: none;
+}
+.item:active {
+  transform: translateX(1px) scale(0.995);
 }
 
 .problemNo {

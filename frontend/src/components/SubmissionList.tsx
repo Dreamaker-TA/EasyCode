@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 import type { SubmissionListItem } from "@/api/types";
 import { formatLocalDateTime } from "@/lib/datetime";
 
@@ -37,7 +39,7 @@ export function SubmissionList({
   }
   return (
     <div className={styles.wrap}>
-      {items.map((it) => {
+      {items.map((it, index) => {
         const effective =
           it.effective_rating ?? it.user_rating_override ?? it.review_rating ?? null;
         const isViewing = !selectionMode && selectedId === it.id;
@@ -54,6 +56,7 @@ export function SubmissionList({
               .filter(Boolean)
               .join(" ")}
             key={it.id}
+            style={{ "--motion-index": Math.min(index, 8) } as CSSProperties}
             onClick={() => {
               if (selectionMode) {
                 onToggleSelect?.(it.id);

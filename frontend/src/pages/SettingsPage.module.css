@@ -41,6 +41,7 @@
   gap: 2px;
   margin-bottom: var(--sp-lg);
   padding: var(--sp-md) var(--sp-lg);
+  animation: settings-banner-in var(--motion-slow) var(--ease-enter) both;
 }
 
 .banner strong {
@@ -136,6 +137,10 @@
   color: var(--ink);
   padding: 0 var(--sp-md);
   font: inherit;
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard);
 }
 
 .field input:focus,
@@ -143,6 +148,13 @@
 .switch input:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--accent) 28%, transparent);
   outline-offset: 2px;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
 .field input:disabled {
@@ -169,6 +181,19 @@
   cursor: pointer;
   font-size: var(--text-sm);
   font-weight: 700;
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard),
+    transform var(--motion-instant) var(--ease-standard);
+}
+
+.switch:hover {
+  border-color: var(--line-strong);
+  background: var(--bg-soft);
+}
+
+.switch:active {
+  transform: scale(0.995);
 }
 
 .switch input {
@@ -187,6 +212,11 @@
 /* 视觉由共享 Button（primary·lg）承担；这里只留布局钩子。 */
 .primaryBtn {
   min-width: 128px;
+}
+
+@keyframes settings-banner-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
 }
 
 @media (max-width: 760px) {

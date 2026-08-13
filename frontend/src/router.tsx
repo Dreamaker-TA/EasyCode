@@ -24,18 +24,13 @@ const SettingsPage = lazy(() =>
 
 function Loading() {
   return (
-    <div
-      style={{
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "var(--ink-subtle)",
-        fontFamily: "var(--font-serif)",
-        fontStyle: "italic",
-      }}
-    >
-      正在加载……
+    <div className="route-loading inline-wait">
+      <span className="inline-wait-dots" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </span>
+      <span>正在加载……</span>
     </div>
   );
 }

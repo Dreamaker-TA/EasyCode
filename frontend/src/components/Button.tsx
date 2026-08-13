@@ -13,6 +13,8 @@ interface StyleProps {
   size?: ButtonSize;
   /** 占满容器宽度（footer 主动作、移动端堆叠等布局场景）。 */
   block?: boolean;
+  /** 进入忙碌态：保留调用方文案，补等待标记并自动禁用。 */
+  loading?: boolean;
   /** QA 结构锚点等 data-* 属性直通。 */
   [dataAttr: `data-${string}`]: string | boolean | undefined;
 }
@@ -44,7 +46,15 @@ function composeClassName(
  */
 export function Button(props: ButtonProps) {
   if (props.as === "link") {
-    const { as: _as, variant = "secondary", size = "md", block = false, className, ...rest } = props;
+    const {
+      as: _as,
+      variant = "secondary",
+      size = "md",
+      block = false,
+      loading: _loading,
+      className,
+      ...rest
+    } = props;
     return <Link {...rest} className={composeClassName(variant, size, block, className)} />;
   }
   const {
@@ -52,14 +62,18 @@ export function Button(props: ButtonProps) {
     variant = "secondary",
     size = "md",
     block = false,
+    loading = false,
     className,
     type,
+    disabled,
     ...rest
   } = props;
   return (
     <button
       {...rest}
       type={type ?? "button"}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
       className={composeClassName(variant, size, block, className)}
     />
   );

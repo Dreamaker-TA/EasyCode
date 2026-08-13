@@ -64,6 +64,9 @@
   font-size: var(--text-sm);
   font-weight: 700;
   list-style: none;
+  transition:
+    color var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard);
 }
 
 .detail summary::-webkit-details-marker {
@@ -76,6 +79,7 @@
   color: var(--ink-subtle);
   font-family: var(--font-mono);
   font-size: var(--text-lg);
+  transition: transform var(--motion-medium) var(--ease-enter);
 }
 
 .detail[open] summary {
@@ -84,7 +88,16 @@
 }
 
 .detail[open] summary::after {
-  content: "-";
+  transform: rotate(45deg);
+}
+
+.detail[open] > :not(summary) {
+  animation: detail-content-in var(--motion-medium) var(--ease-enter) both;
+}
+
+@keyframes detail-content-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
 }
 
 .detail summary:focus-visible {

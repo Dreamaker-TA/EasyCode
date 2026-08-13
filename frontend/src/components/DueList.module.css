@@ -53,10 +53,17 @@
   border-bottom: 1px solid var(--line);
   color: var(--ink);
   text-decoration: none;
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 .row:hover {
   background: var(--bg-soft);
+  transform: translateX(3px);
   text-decoration: none;
+}
+.row:active {
+  transform: translateX(1px) scale(0.995);
 }
 .id {
   font-family: var(--font-mono);

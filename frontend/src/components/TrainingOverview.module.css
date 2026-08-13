@@ -4,6 +4,7 @@
   border-radius: var(--radius-lg);
   padding: var(--sp-xl);
   margin-bottom: var(--sp-2xl);
+  animation: overview-in var(--motion-slow) var(--ease-enter) both;
 }
 
 /* 调度器状态语义由 kicker 前的 tone 色点承载。色点尺寸/形状对齐库内 toneDot 模式
@@ -105,13 +106,33 @@
   text-decoration: none;
   transition:
     border-color var(--motion-fast) var(--ease-standard),
-    background var(--motion-fast) var(--ease-standard);
+    background var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
+  animation: overview-tile-in var(--motion-slow) var(--ease-enter) backwards;
+}
+
+.tile:nth-child(2) { animation-delay: 35ms; }
+.tile:nth-child(3) { animation-delay: 70ms; }
+.tile:nth-child(4) { animation-delay: 105ms; }
+
+@keyframes overview-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes overview-tile-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
 }
 
 .tile:hover {
   border-color: var(--line-strong);
   background: var(--bg-soft);
+  transform: translateY(-2px);
   text-decoration: none;
+}
+.tile:active {
+  transform: translateY(0) scale(0.99);
 }
 
 .dueTile {

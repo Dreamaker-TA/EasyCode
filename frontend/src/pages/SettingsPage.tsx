@@ -318,6 +318,7 @@ export function SettingsPage() {
                 size="lg"
                 className={styles.primaryBtn}
                 disabled={!canSave}
+                loading={patchSettings.isPending}
               >
                 {patchSettings.isPending ? "保存中" : "保存设置"}
               </Button>

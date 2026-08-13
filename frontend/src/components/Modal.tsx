@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 import { useScrollLock } from "@/hooks/useScrollLock";
+import { usePresence } from "@/hooks/usePresence";
 
 import styles from "./Modal.module.css";
 
@@ -25,20 +26,23 @@ export function Modal({
   "data-qa": dataQa,
 }: Props) {
   useScrollLock(open);
+  const { rendered, closing } = usePresence(open, 160);
 
-  if (!open) return null;
+  if (!rendered) return null;
 
   return createPortal(
     <div
-      className={styles.backdrop}
+      className={`${styles.backdrop} ${closing ? styles.backdropClosing : ""}`}
       onMouseDown={() => {
-        if (closeOnBackdrop) onClose();
+        if (open && closeOnBackdrop) onClose();
       }}
     >
       <div
-        className={`${styles.panel} ${contentClassName ?? ""}`}
+        className={`${styles.panel} ${closing ? styles.panelClosing : ""} ${contentClassName ?? ""}`}
         data-qa={dataQa}
-        data-title-id={titleId}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
         onMouseDown={(event) => event.stopPropagation()}
       >
         {children}

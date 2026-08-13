@@ -39,7 +39,15 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   font-weight: 700;
+  transition:
+    color var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-instant) var(--ease-standard);
 }
+.tab:hover { border-color: var(--line-strong); color: var(--ink); }
+.tab:active,
+.tabActive:active { transform: scale(0.985); }
 
 .tab {
   background: var(--bg);
@@ -57,6 +65,12 @@
   flex-direction: column;
   gap: var(--sp-md);
   padding: var(--sp-lg);
+  animation: export-panel-in var(--motion-medium) var(--ease-enter) both;
+}
+
+@keyframes export-panel-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
 }
 
 .checkRow {
@@ -111,6 +125,12 @@
   height: 100%;
   display: block;
   object-fit: contain;
+  animation: preview-in var(--motion-slow) var(--ease-enter) both;
+}
+
+@keyframes preview-in {
+  from { opacity: 0; transform: scale(0.985); }
+  to { opacity: 1; transform: none; }
 }
 
 .error {

@@ -241,7 +241,8 @@ export function ReviewPanel({
         </div>
 
         {reportView === "concise" ? (
-          <ReviewOverview
+          <div key="concise" className={styles.reportView}>
+            <ReviewOverview
             submission={submission}
             review={review}
             dimensions={dimensions}
@@ -261,14 +262,17 @@ export function ReviewPanel({
             onContinue={onContinue}
             onRestart={onRestart}
             onRetryReview={onRetryReview}
-          />
+            />
+          </div>
         ) : (
-          <ReviewDetails
-            submission={submission}
-            review={review}
-            dimensions={dimensions}
-            diagnosis={diagnosis}
-          />
+          <div key="full" className={styles.reportView}>
+            <ReviewDetails
+              submission={submission}
+              review={review}
+              dimensions={dimensions}
+              diagnosis={diagnosis}
+            />
+          </div>
         )}
 
         {exportInfo && (

@@ -11,6 +11,7 @@
 .card {
   width: 100%;
   max-width: 460px;
+  animation: prepare-card-in var(--motion-slow) var(--ease-enter) both;
 }
 
 .title {
@@ -37,6 +38,7 @@
   background: color-mix(in srgb, var(--accent) 6%, var(--bg-elevated));
   border: 1px solid color-mix(in srgb, var(--accent) 36%, var(--line));
   border-radius: var(--radius-md);
+  animation: conditional-field-in var(--motion-medium) var(--ease-enter) both;
 }
 .residualText {
   margin: 0 0 var(--sp-md);
@@ -68,6 +70,7 @@
   margin: 0;
   padding: 0;
   min-inline-size: 0;
+  transition: opacity var(--motion-medium) var(--ease-standard);
 }
 .group:disabled {
   opacity: 0.4;
@@ -102,15 +105,20 @@
   border-radius: var(--radius-md);
   text-align: left;
   cursor: pointer;
-  transition: border-color var(--motion-fast), background var(--motion-fast);
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
   min-height: 92px;
 }
 .modeBtn:hover {
   border-color: var(--accent-muted);
+  transform: translateY(-1px);
 }
 .modeBtnOn {
   border-color: var(--accent);
   background: var(--bg-elevated);
+  transform: translateY(-1px);
 }
 .modeLabel {
   font-family: var(--font-serif);
@@ -142,14 +150,34 @@
   color: var(--ink-muted);
   cursor: pointer;
   font-variant-numeric: tabular-nums;
-  transition: color var(--motion-fast), border-color var(--motion-fast);
+  transition:
+    color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard),
+    transform var(--motion-instant) var(--ease-standard);
 }
 .preset:hover {
   color: var(--ink);
+  transform: translateY(-1px);
 }
 .presetOn {
   border-color: var(--accent);
   color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, var(--bg-elevated));
+}
+
+.conditionalField {
+  animation: conditional-field-in var(--motion-medium) var(--ease-enter) both;
+}
+
+@keyframes prepare-card-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes conditional-field-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
 }
 
 .langHint {

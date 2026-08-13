@@ -29,10 +29,43 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-pop);
   outline: none;
+  animation: modal-panel-in var(--motion-medium) var(--ease-enter) both;
 }
 
 .panel:focus-visible {
   box-shadow:
     0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent),
     var(--shadow-pop);
+}
+
+.backdropClosing {
+  animation: modal-backdrop-out 140ms var(--ease-exit) both;
+}
+
+.panelClosing {
+  animation: modal-panel-out 140ms var(--ease-exit) both;
+}
+
+@keyframes modal-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes modal-backdrop-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-panel-out {
+  to {
+    opacity: 0;
+    transform: translateY(6px) scale(0.99);
+  }
 }

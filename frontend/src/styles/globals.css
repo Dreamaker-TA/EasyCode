@@ -57,14 +57,15 @@
   --radius-pill: 999px;
 
   /* === Motion === */
-  --motion-fast: 120ms;
-  --motion-medium: 180ms;
-  --motion-slow: 240ms;
-  --motion-reveal: 1200ms;
-  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --motion-instant: 100ms;
+  --motion-fast: 140ms;
+  --motion-medium: 200ms;
+  --motion-slow: 260ms;
+  --motion-reveal: 420ms;
+  --ease-standard: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* === 深度：全站唯一真投影（仅浮层用） === */
   --shadow-pop: 0 10px 32px color-mix(in srgb, var(--ink) 12%, transparent);
@@ -124,6 +125,76 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+html.theme-transitioning,
+html.theme-transitioning body,
+html.theme-transitioning body * {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: var(--motion-slow);
+  transition-timing-function: var(--ease-standard);
+}
+
+/* 路由切换只做一次短促的焦点交接，不编排页面内容，也不阻塞操作。 */
+.route-view {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  animation: route-view-in var(--motion-medium) var(--ease-enter) both;
+}
+
+.route-loading {
+  flex: 1;
+  justify-content: center;
+  padding: var(--sp-2xl);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* 状态块替换时的共享进入语言：测试、评测、筛选空态等都使用同一节奏。 */
+.motion-state-in {
+  animation: motion-state-in var(--motion-medium) var(--ease-enter) both;
+}
+
+.motion-list-item {
+  animation: motion-list-item-in var(--motion-slow) var(--ease-enter) backwards;
+  animation-delay: calc(var(--motion-index, 0) * 24ms);
+}
+
+@keyframes route-view-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes motion-state-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes motion-list-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 :focus-visible {
@@ -274,22 +345,24 @@ button:disabled {
 /* 骨架基元：占位块 + 统一 shimmer（时长 1.4s，透明度呼吸，不动 width/height）。 */
 .skeleton-bar,
 .skeleton-block {
-  background: var(--bg-soft);
+  background:
+    linear-gradient(
+      105deg,
+      var(--bg-soft) 30%,
+      color-mix(in srgb, var(--line) 64%, var(--bg-elevated)) 48%,
+      var(--bg-soft) 66%
+    );
+  background-size: 240% 100%;
   border-radius: var(--radius-sm);
-  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  animation: skeleton-shimmer 1.4s linear infinite;
 }
 .skeleton-bar {
   height: 12px;
 }
 
 @keyframes skeleton-shimmer {
-  0%,
-  100% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 0.85;
-  }
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
 }
 
 /* 行内等待：文字 + 三个循环闪动的脉冲点，给等待一个"活着"的提示。 */
@@ -330,5 +403,18 @@ button:disabled {
   }
   40% {
     opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-delay: 0ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

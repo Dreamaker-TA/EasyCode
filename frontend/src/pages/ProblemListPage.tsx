@@ -72,7 +72,12 @@ export function ProblemListPage() {
             题库暂时没有加载成功。请确认后端正在运行，然后刷新页面。
           </div>
         )}
-        {data && <ProblemListGrouped items={filtered} />}
+        {data && (
+          <ProblemListGrouped
+            key={`${query.trim().toLowerCase()}:${coreOnly}`}
+            items={filtered}
+          />
+        )}
       </section>
     </div>
   );

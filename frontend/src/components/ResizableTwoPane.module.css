@@ -8,6 +8,12 @@
 
 .desktopNotice {
   display: none;
+  animation: narrow-notice-in var(--motion-slow) var(--ease-enter) both;
+}
+
+@keyframes narrow-notice-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
 }
 
 .pane {

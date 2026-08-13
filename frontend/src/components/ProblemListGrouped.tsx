@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, type CSSProperties } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import type { ProblemListItem } from "@/api/types";
@@ -50,16 +50,24 @@ export function ProblemListGrouped({ items }: Props) {
 
   return (
     <div className={styles.wrap}>
-      {groups.map((g) => (
-        <section key={g.chapter_no} className={styles.group}>
+      {groups.map((g, groupIndex) => (
+        <section
+          key={g.chapter_no}
+          className={`${styles.group} motion-list-item`}
+          style={{ "--motion-index": Math.min(groupIndex, 5) } as CSSProperties}
+        >
           <header className={styles.groupHeader}>
             <span className={styles.chapterNo}>第 {String(g.chapter_no).padStart(2, "0")} 章</span>
             <span className={styles.category}>{g.category}</span>
             <span className={`tnum ${styles.groupCount}`}>{g.items.length}</span>
           </header>
           <ul className={styles.list}>
-            {g.items.map((p) => (
-              <li key={p.id}>
+            {g.items.map((p, itemIndex) => (
+              <li
+                key={p.id}
+                className="motion-list-item"
+                style={{ "--motion-index": Math.min(itemIndex, 8) } as CSSProperties}
+              >
                 <Link
                   to={`/problem/${p.id}`}
                   state={{ from: fromPath }}

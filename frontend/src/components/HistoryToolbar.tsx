@@ -74,6 +74,7 @@ export function HistoryToolbar({
               size="md"
               onClick={onDeleteSelected}
               disabled={selectedCount === 0 || deletePending}
+              loading={deletePending}
             >
               {deletePending ? "删除中…" : "删除选中"}
             </Button>

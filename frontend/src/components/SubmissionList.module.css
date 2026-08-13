@@ -24,15 +24,22 @@
   text-align: left;
   cursor: pointer;
   width: 100%;
-  transition: background-color var(--motion-fast);
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard);
   min-height: 54px;
+  animation: submission-row-in var(--motion-slow) var(--ease-enter) backwards;
+  animation-delay: calc(var(--motion-index, 0) * 24ms);
 }
 .row:last-child {
   border-bottom: 1px solid var(--line);
 }
 .row:hover {
   background: var(--bg-soft);
+  transform: translateX(3px);
 }
+.row:active { transform: translateX(1px) scale(0.995); }
 .rowSelected {
   background: var(--bg-soft);
   box-shadow: inset 2px 0 0 var(--accent);
@@ -66,13 +73,22 @@
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   line-height: 1;
-  transition: background var(--motion-fast), border-color var(--motion-fast);
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-medium) var(--ease-emphasis);
 }
 
 .checkboxOn {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--ink-on-accent);
+  transform: scale(1.08);
+}
+
+@keyframes submission-row-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
 }
 
 .timestamp {

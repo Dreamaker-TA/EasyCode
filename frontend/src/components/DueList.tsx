@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import type { DueItem } from "@/api/types";
@@ -43,11 +44,15 @@ export function DueList({ items }: Props) {
 
   return (
     <div className={styles.wrap}>
-      {PRIORITY_ORDER.map((priority) => {
+      {PRIORITY_ORDER.map((priority, priorityIndex) => {
         const group = items.filter((item) => item.priority === priority);
         if (group.length === 0) return null;
         return (
-          <section key={priority} className={`${styles.group} ${priorityToneClass(priority)}`}>
+          <section
+            key={priority}
+            className={`${styles.group} ${priorityToneClass(priority)} motion-list-item`}
+            style={{ "--motion-index": priorityIndex } as CSSProperties}
+          >
             <div className={styles.groupHeader}>
               <div>
                 <h2>{PRIORITY_LABELS[priority]}</h2>
@@ -55,7 +60,7 @@ export function DueList({ items }: Props) {
               </div>
               <span>{group.length} 题</span>
             </div>
-            {group.map((it) => {
+            {group.map((it, itemIndex) => {
               const overdue = it.days_overdue > 0;
               // 主行只承载题号+标题+评级徽标+到期；理由 + 本次目标合成一行截断（ellipsis），
               // 完整文案由 title 属性给出。
@@ -65,7 +70,8 @@ export function DueList({ items }: Props) {
                   to={`/problem/${it.problem_id}`}
                   state={{ from: fromPath }}
                   key={it.problem_id}
-                  className={styles.row}
+                  className={`${styles.row} motion-list-item`}
+                  style={{ "--motion-index": Math.min(itemIndex, 8) } as CSSProperties}
                 >
                   <span className={styles.id}>
                     {it.leetcode_id ?? it.external_id ?? "—"}

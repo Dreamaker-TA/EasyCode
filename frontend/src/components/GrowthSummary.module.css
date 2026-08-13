@@ -32,7 +32,13 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--bg-elevated);
+  animation: growth-panel-in var(--motion-slow) var(--ease-enter) both;
 }
+
+.metric:nth-of-type(2),
+.panel:nth-of-type(2) { animation-delay: 30ms; }
+.metric:nth-of-type(3),
+.panel:nth-of-type(3) { animation-delay: 60ms; }
 
 .metric {
   min-height: 88px;
@@ -91,6 +97,8 @@
   border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   background: var(--accent-muted);
   border: 1px solid var(--line-strong);
+  transform-origin: bottom;
+  animation: history-bar-in var(--motion-reveal) var(--ease-enter) both;
 }
 
 .dayLabel {
@@ -128,6 +136,8 @@
   height: 100%;
   border-radius: inherit;
   background: var(--tone-mark, var(--ink-muted));
+  transform-origin: left;
+  animation: history-fill-in var(--motion-reveal) var(--ease-enter) both;
 }
 
 .ratingCount {
@@ -174,7 +184,29 @@
 
 .retryLink:hover {
   background: var(--bg);
+  transform: translateX(2px);
   text-decoration: none;
+}
+
+.retryLink {
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
+}
+
+@keyframes growth-panel-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes history-bar-in {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes history-fill-in {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 .muted {

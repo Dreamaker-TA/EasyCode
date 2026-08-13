@@ -124,11 +124,16 @@
   resize: vertical;
   min-height: 64px;
   max-height: 32vh;
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard);
 }
 
 .input:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 .askActions {
@@ -166,6 +171,22 @@
 @keyframes slideIn {
   from { transform: translateX(20px); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
+}
+
+.backdropClosing {
+  animation: fadeOut 140ms var(--ease-exit) both;
+}
+
+.drawerClosing {
+  animation: slideOut 180ms var(--ease-exit) both;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+@keyframes slideOut {
+  to { transform: translateX(20px); opacity: 0; }
 }
 
 @media (max-width: 520px) {

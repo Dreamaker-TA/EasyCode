@@ -27,12 +27,18 @@
   font-size: var(--text-2sm);
   color: var(--ink-muted);
   cursor: pointer;
-  transition: color var(--motion-fast), border-color var(--motion-fast), background var(--motion-fast);
+  transition:
+    color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard),
+    transform var(--motion-instant) var(--ease-standard);
 }
 .chip:hover:not(:disabled) {
   color: var(--ink);
   border-color: var(--line-strong);
+  transform: translateY(-1px);
 }
+.chip:active:not(:disabled) { transform: translateY(0) scale(0.985); }
 .chip:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -41,6 +47,7 @@
   color: var(--accent);
   border-color: var(--accent);
   background: var(--bg-elevated);
+  transform: translateY(-1px);
 }
 .chipOn:hover {
   color: var(--accent);

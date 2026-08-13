@@ -68,6 +68,7 @@ export function SubmitToolbar({
           className={styles.run}
           onClick={onRunTest}
           disabled={runDisabled}
+          loading={running}
         >
           {running ? "运行中…" : "运行测试"}
         </Button>
@@ -78,6 +79,7 @@ export function SubmitToolbar({
         className={styles.submit}
         onClick={onSubmit}
         disabled={submitDisabled}
+        loading={busy}
       >
         {submitLabel(state, reviewingElapsedSec)}
       </Button>

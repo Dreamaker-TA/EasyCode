@@ -8,15 +8,27 @@
   padding: 0 var(--sp-md);
   min-height: 44px;
   min-width: 240px;
-  transition: border-color var(--motion-fast);
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard);
 }
 .box:focus-within {
   border-color: var(--accent);
+  background: var(--bg);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
 .icon {
   color: var(--ink-subtle);
   font-size: var(--text-base);
+  transition:
+    color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
+}
+.box:focus-within .icon {
+  color: var(--accent);
+  transform: scale(1.08);
 }
 
 .input {

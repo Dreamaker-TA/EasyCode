@@ -28,8 +28,10 @@
   text-decoration: none;
   font-family: var(--font-serif);
   letter-spacing: 0.01em;
+  transition: color var(--motion-fast) var(--ease-standard);
 }
 .brand:hover {
+  color: var(--accent);
   text-decoration: none;
 }
 .brandMark {
@@ -49,12 +51,26 @@
   flex: 1;
 }
 .navLink {
+  position: relative;
   font-size: var(--text-sm);
   color: var(--ink-muted);
   padding: 4px 0;
-  border-bottom: 1.5px solid transparent;
   text-decoration: none;
   transition: color var(--motion-fast) var(--ease-standard);
+}
+.navLink::after,
+.settingsLink::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--motion-medium) var(--ease-enter);
 }
 .navLink:hover {
   color: var(--ink);
@@ -62,14 +78,16 @@
 }
 .navLinkActive {
   color: var(--ink);
-  border-bottom-color: var(--accent);
+}
+.navLinkActive::after {
+  transform: scaleX(1);
 }
 
 .settingsLink {
+  position: relative;
   font-size: var(--text-sm);
   color: var(--ink-muted);
   padding: 4px 0;
-  border-bottom: 1.5px solid transparent;
   text-decoration: none;
   transition: color var(--motion-fast) var(--ease-standard);
   white-space: nowrap;
@@ -94,6 +112,18 @@
   font-size: var(--text-2xs);
   font-variant-numeric: tabular-nums;
   text-align: center;
+  animation: due-badge-in var(--motion-slow) var(--ease-emphasis) both;
+}
+
+@keyframes due-badge-in {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .main {

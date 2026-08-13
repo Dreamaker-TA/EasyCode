@@ -85,14 +85,15 @@ export const tokens = {
     pill: 999,
   },
   motion: {
-    fast: "120ms",
-    medium: "180ms",
-    slow: "240ms",
-    reveal: "1200ms", // 一次性揭示基准时长（五维雷达绘入专用）
-    easeStandard: "cubic-bezier(0.2, 0, 0, 1)",
-    easeEnter: "cubic-bezier(0, 0, 0.2, 1)",
+    instant: "100ms", // 按压、勾选等直接反馈
+    fast: "140ms",
+    medium: "200ms",
+    slow: "260ms",
+    reveal: "420ms", // 数据图形一次性绘入；不阻塞操作
+    easeStandard: "cubic-bezier(0.25, 1, 0.5, 1)", // ease-out-quart
+    easeEnter: "cubic-bezier(0.22, 1, 0.36, 1)", // ease-out-quint
     easeExit: "cubic-bezier(0.4, 0, 1, 1)",
-    easeSpring: "cubic-bezier(0.34, 1.56, 0.64, 1)", // 回弹（雷达圆点 / 签名回弹）
+    easeEmphasis: "cubic-bezier(0.16, 1, 0.3, 1)", // ease-out-expo，无回弹
   },
   /**
    * Monaco 编辑器主题数值源。两套主题与应用壳同气质：

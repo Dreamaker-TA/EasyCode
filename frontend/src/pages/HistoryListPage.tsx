@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 
 import { listProblemHistory } from "@/api/history";
@@ -140,9 +140,13 @@ export function HistoryListPage() {
         />
       ) : (
         <>
-          <div className={styles.list} data-qa="history-list">
-            {pagedItems.map((it) => (
-              <Row key={it.problem_id} item={it} />
+          <div
+            key={`${query.trim().toLowerCase()}:${currentPage}`}
+            className={styles.list}
+            data-qa="history-list"
+          >
+            {pagedItems.map((it, index) => (
+              <Row key={it.problem_id} item={it} index={index} />
             ))}
           </div>
           {pageCount > 1 && (
@@ -176,9 +180,13 @@ export function HistoryListPage() {
   );
 }
 
-function Row({ item }: { item: HistoryListItem }) {
+function Row({ item, index }: { item: HistoryListItem; index: number }) {
   return (
-    <Link to={`/history/${item.problem_id}`} className={styles.row}>
+    <Link
+      to={`/history/${item.problem_id}`}
+      className={`${styles.row} motion-list-item`}
+      style={{ "--motion-index": Math.min(index, 8) } as CSSProperties}
+    >
       <div className={styles.titleCol}>
         <span className={styles.titleMain}>
           {item.is_core && <span className={styles.core}>★</span>}

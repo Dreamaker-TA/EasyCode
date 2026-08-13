@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 
 import type { TutorMessage } from "@/api/types";
 import { useScrollLock } from "@/hooks/useScrollLock";
+import { usePresence } from "@/hooks/usePresence";
 import type { AppErrorView } from "@/lib/errors";
 
 import { Button } from "./Button";
@@ -48,8 +49,9 @@ export function HelpDrawer({
   }, [open, messages.length, pendingStudent, streamingText]);
 
   useScrollLock(open);
+  const { rendered, closing } = usePresence(open, 180);
 
-  if (!open) return null;
+  if (!rendered) return null;
 
   const handleSend = () => {
     if (loading) return;
@@ -81,8 +83,13 @@ export function HelpDrawer({
 
   return createPortal(
     <>
-      <div className={styles.backdrop} onClick={onClose} />
-      <aside className={styles.drawer} data-qa="help-drawer">
+      <div
+        className={`${styles.backdrop} ${closing ? styles.backdropClosing : ""}`}
+        onClick={() => {
+          if (open) onClose();
+        }}
+      />
+      <aside className={`${styles.drawer} ${closing ? styles.drawerClosing : ""}`} data-qa="help-drawer">
         <header className={styles.header}>
           <div className={styles.headerText}>
             <h2 className={styles.title}>求助</h2>
@@ -147,6 +154,7 @@ export function HelpDrawer({
               className={styles.askBtn}
               onClick={handleSend}
               disabled={loading}
+              loading={loading}
             >
               {loading ? "请求中…" : "发送"}
             </Button>

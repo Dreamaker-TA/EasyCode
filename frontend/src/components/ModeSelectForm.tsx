@@ -105,6 +105,7 @@ export function ModeSelectForm({
                 size="md"
                 onClick={() => onContinueResidual?.()}
                 disabled={creating || continuePending}
+                loading={continuePending}
               >
                 {continuePending ? "读取中…" : "继续作答"}
               </Button>
@@ -145,7 +146,7 @@ export function ModeSelectForm({
         </div>
 
         {mode === "timed" && (
-          <div className={styles.field}>
+          <div className={`${styles.field} ${styles.conditionalField}`}>
             <span className={styles.fieldLabel}>时长</span>
             <div className={styles.presets}>
               {TIMED_PRESETS.map((p) => (
@@ -198,6 +199,7 @@ export function ModeSelectForm({
             className={styles.confirm}
             onClick={handleConfirmFresh}
             disabled={creating}
+            loading={creating}
           >
             {creating ? "正在准备…" : "开始作答 →"}
           </Button>

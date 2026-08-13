@@ -62,11 +62,17 @@
   color: var(--ink);
   text-decoration: none;
   font-family: var(--font-sans);
-  transition: background-color var(--motion-fast);
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 .row:hover {
   background: var(--bg-soft);
+  transform: translateX(3px);
   text-decoration: none;
+}
+.row:active {
+  transform: translateX(1px) scale(0.995);
 }
 
 .titleCol {

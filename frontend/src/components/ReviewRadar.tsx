@@ -71,7 +71,7 @@ export function ReviewRadar({ dimensions }: Props) {
               cx={point.plot.x}
               cy={point.plot.y}
               r={point.dimension.available ? 4 : 3}
-              style={{ animationDelay: `${420 + index * 200}ms` }}
+              style={{ animationDelay: `${140 + index * 40}ms` }}
             />
             <text
               className={styles.label}
@@ -79,7 +79,7 @@ export function ReviewRadar({ dimensions }: Props) {
               y={point.label.y}
               textAnchor={labelAnchor(point.label.x, GEOMETRY)}
               dominantBaseline="middle"
-              style={{ animationDelay: `${640 + index * 120}ms` }}
+              style={{ animationDelay: `${180 + index * 32}ms` }}
             >
               {point.dimension.label}
             </text>

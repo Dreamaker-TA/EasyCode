@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-md);
+  animation: test-result-in var(--motion-medium) var(--ease-enter) both;
 }
 
 /* ============ Header（verdict 徽章 + 计数） ============ */
@@ -33,18 +34,17 @@
 }
 
 /* ============ 失败严重度行 ============
- * 3px 左色条（唯一"左色条"语义 = 严重度）取 --tone-fg，底为 --bg-elevated
- * （数据面的 surface 台阶）。状态标签左 · 样例编号居中 · 计数右（tabular）。
+ * 语义色使用完整描边与淡染底，不依赖单边色条。状态标签左 · 样例编号居中。
  * danger / warn 组由 TestOutputPanel 排序保证 danger 在上，此处只承载单行外观。 */
 .failureRow {
   display: flex;
   flex-direction: column;
   gap: 6px;
   padding: var(--sp-sm) var(--sp-md);
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--tone-fg, var(--line-strong));
+  border: 1px solid var(--tone-border, var(--line));
   border-radius: var(--radius-sm);
-  background: var(--bg-elevated);
+  background: var(--tone-surface, var(--bg-elevated));
+  animation: test-row-in var(--motion-medium) var(--ease-enter) both;
 }
 
 .failureHead {
@@ -112,7 +112,7 @@
   margin: 0;
   padding: 6px 8px;
   background: var(--bg-soft);
-  border-left: 2px solid var(--warn);
+  border: 1px solid color-mix(in srgb, var(--warn) 32%, var(--line));
   border-radius: var(--radius-sm);
   font-family: var(--font-sans);
   font-size: var(--text-2sm);
@@ -129,6 +129,14 @@
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   color: var(--success);
+  animation: test-pass-in var(--motion-slow) var(--ease-emphasis) both;
+}
+
+.allPass::before {
+  content: "✓";
+  display: inline-block;
+  margin-right: var(--sp-sm);
+  font-family: var(--font-mono);
 }
 
 /* ============ loading / idle / error ============ */
@@ -172,6 +180,22 @@
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-md);
   background: var(--bg-soft);
+  animation: test-row-in var(--motion-medium) var(--ease-enter) both;
+}
+
+@keyframes test-result-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes test-row-in {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes test-pass-in {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: none; }
 }
 .errorTitle {
   font-family: var(--font-sans);

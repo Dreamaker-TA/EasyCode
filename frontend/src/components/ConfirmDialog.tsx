@@ -29,8 +29,6 @@ export function ConfirmDialog({
 }: Props) {
   const titleId = useId();
 
-  if (!open) return null;
-
   return (
     <Modal
       open={open}
@@ -42,7 +40,7 @@ export function ConfirmDialog({
       closeOnBackdrop={!loading}
       contentClassName={styles.dialog}
     >
-        <h2 className={styles.title}>{title}</h2>
+        <h2 id={titleId} className={styles.title}>{title}</h2>
         {description && <p className={styles.description}>{description}</p>}
         <div className={styles.actions}>
           <Button variant="secondary" size="lg" onClick={onCancel} disabled={loading}>
@@ -53,6 +51,7 @@ export function ConfirmDialog({
             size="lg"
             onClick={onConfirm}
             disabled={loading}
+            loading={loading}
           >
             {loading ? "处理中…" : confirmLabel}
           </Button>

@@ -17,6 +17,7 @@ import styles from "./StatusToast.module.css";
 interface ToastState {
   id: number;
   message: ReactNode;
+  closing: boolean;
 }
 
 const AUTO_DISMISS_MS = 3000;
@@ -44,23 +45,25 @@ function getSnapshot(): ToastState | null {
 /** 显示一条成功反馈（同一时刻只保留最新一条，重复触发会重置计时）。 */
 export function showToast(message: ReactNode): void {
   seq += 1;
-  current = { id: seq, message };
+  current = { id: seq, message, closing: false };
   if (dismissTimer) clearTimeout(dismissTimer);
-  dismissTimer = setTimeout(() => {
-    current = null;
-    dismissTimer = null;
-    emit();
-  }, AUTO_DISMISS_MS);
+  dismissTimer = setTimeout(beginDismiss, AUTO_DISMISS_MS);
   emit();
 }
 
-function dismissNow() {
+function beginDismiss() {
+  if (!current || current.closing) return;
   if (dismissTimer) {
     clearTimeout(dismissTimer);
     dismissTimer = null;
   }
-  current = null;
+  current = { ...current, closing: true };
   emit();
+  dismissTimer = setTimeout(() => {
+    current = null;
+    dismissTimer = null;
+    emit();
+  }, 160);
 }
 
 /** 单实例宿主，渲染当前 toast；放在 AppShell 里即可覆盖全站。 */
@@ -72,9 +75,9 @@ export function ToastHost() {
     <div className={styles.viewport}>
       <div
         key={toast.id}
-        className={styles.toast}
+        className={`${styles.toast} ${toast.closing ? styles.toastClosing : ""}`}
         data-qa="status-toast"
-        onClick={dismissNow}
+        onClick={beginDismiss}
       >
         <span className={styles.mark}>✓</span>
         <span className={styles.message}>{toast.message}</span>

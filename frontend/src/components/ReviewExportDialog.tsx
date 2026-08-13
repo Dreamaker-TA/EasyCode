@@ -145,7 +145,7 @@ export function ReviewExportDialog({
       </div>
 
       {panel === "markdown" ? (
-        <section className={styles.panel} data-qa="export-panel-markdown">
+        <section key="markdown" className={styles.panel} data-qa="export-panel-markdown">
           <label className={styles.checkRow}>
             <input
               type="checkbox"
@@ -165,7 +165,7 @@ export function ReviewExportDialog({
           </div>
         </section>
       ) : (
-        <section className={styles.panel} data-qa="export-panel-share">
+        <section key="share" className={styles.panel} data-qa="export-panel-share">
           <div className={styles.previewFrame} data-empty={previewUrl ? "false" : "true"}>
             {previewUrl ? (
               <img
@@ -186,6 +186,7 @@ export function ReviewExportDialog({
                 size="lg"
                 onClick={handleGenerateShareCard}
                 disabled={generating}
+                loading={generating}
               >
                 {generating ? "正在生成…" : "重试"}
               </Button>

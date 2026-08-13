@@ -88,6 +88,19 @@
   border-radius: var(--radius-md);
   background: var(--bg-elevated);
   box-shadow: var(--shadow-pop);
+  transform-origin: top right;
+  animation: export-menu-in var(--motion-medium) var(--ease-enter) both;
+}
+
+@keyframes export-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .exportMenu button {

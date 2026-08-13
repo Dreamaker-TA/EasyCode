@@ -136,6 +136,7 @@ function ActionControl({
       block
       onClick={handleClick}
       disabled={disabled}
+      loading={action.intent === "retry_review" && retryPending}
       title={action.kind === "secondary" ? action.reason : undefined}
     >
       {action.intent === "retry_review" && retryPending ? "重试中…" : action.label}

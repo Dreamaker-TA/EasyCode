@@ -109,6 +109,8 @@ button.solid:hover:not(:disabled) {
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-pop);
+  transform-origin: top left;
+  animation: rating-menu-in var(--motion-medium) var(--ease-enter) both;
 }
 
 .option {
@@ -124,9 +126,24 @@ button.solid:hover:not(:disabled) {
   color: var(--ink);
   text-align: left;
   border-radius: var(--radius-sm);
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    transform var(--motion-instant) var(--ease-standard);
 }
 .option:hover {
   background: var(--bg-soft);
+  transform: translateX(2px);
+}
+
+@keyframes rating-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 .option:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--accent) 42%, transparent);

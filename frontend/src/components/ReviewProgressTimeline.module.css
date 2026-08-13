@@ -78,6 +78,7 @@
 }
 
 .marker {
+  position: relative;
   width: 13px;
   height: 13px;
   margin-top: 2px;
@@ -118,6 +119,20 @@
   border-color: var(--accent);
   background: var(--accent);
   transform: scale(1.12);
+}
+
+.step_active .marker::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 1px solid color-mix(in srgb, var(--accent) 52%, transparent);
+  border-radius: 50%;
+  animation: review-active-pulse 1.4s var(--ease-standard) infinite;
+}
+
+@keyframes review-active-pulse {
+  0%, 100% { opacity: 0.28; transform: scale(0.82); }
+  50% { opacity: 0.72; transform: scale(1); }
 }
 
 .step_active .copy strong {

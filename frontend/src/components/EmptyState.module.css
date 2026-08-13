@@ -9,6 +9,7 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--bg-elevated);
+  animation: empty-state-in var(--motion-slow) var(--ease-enter) both;
 }
 
 .kicker {
@@ -27,4 +28,9 @@
 
 .action {
   margin-top: var(--sp-sm);
+}
+
+@keyframes empty-state-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
 }

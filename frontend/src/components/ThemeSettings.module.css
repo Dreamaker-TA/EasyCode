@@ -53,18 +53,43 @@
   transition:
     background var(--motion-fast) var(--ease-standard),
     border-color var(--motion-fast) var(--ease-standard),
-    color var(--motion-fast) var(--ease-standard);
+    color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 
 .option:hover {
   color: var(--ink);
   background: var(--bg-soft);
+  transform: translateY(-1px);
 }
 
 .optionSelected {
   border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
   background: var(--bg-elevated);
   color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.optionSelected::after {
+  content: "✓";
+  position: absolute;
+  top: var(--sp-sm);
+  right: var(--sp-sm);
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--ink-on-accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  animation: theme-check-in var(--motion-medium) var(--ease-emphasis) both;
+}
+
+@keyframes theme-check-in {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .input {

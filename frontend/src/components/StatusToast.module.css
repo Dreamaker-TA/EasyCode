@@ -57,3 +57,14 @@
     transform: translateY(0);
   }
 }
+
+.toastClosing {
+  animation: toast-exit 140ms var(--ease-exit) both;
+}
+
+@keyframes toast-exit {
+  to {
+    opacity: 0;
+    transform: translateY(5px) scale(0.98);
+  }
+}

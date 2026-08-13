@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 
 import { useReviewsDue } from "@/hooks/useReviewsDue";
 import { useTheme } from "@/hooks/useTheme";
@@ -8,6 +8,7 @@ import styles from "./AppShell.module.css";
 
 export function AppShell() {
   useTheme();
+  const location = useLocation();
   const { data: due } = useReviewsDue();
   const dueCount = due?.items.length ?? 0;
   return (
@@ -54,7 +55,9 @@ export function AppShell() {
         </NavLink>
       </header>
       <main className={styles.main}>
-        <Outlet />
+        <div key={location.pathname} className="route-view">
+          <Outlet />
+        </div>
       </main>
       <ToastHost />
     </div>
